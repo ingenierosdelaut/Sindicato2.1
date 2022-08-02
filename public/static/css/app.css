@@ -1,0 +1,97 @@
+@page {
+    margin: 0cm 0cm;
+    font-family: Arial;
+}
+
+body {
+    margin: -1cm 1cm 0cm;
+}
+
+header {
+    position: absolute;
+    top: 0cm;
+    left: 0cm;
+    right: 0cm;
+    height: 2cm;
+    margin-bottom: 50px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+}
+
+header>h1 {
+    margin: 10px;
+    padding: 2px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0cm;
+    left: 0cm;
+    right: 0cm;
+    height: 0.5cm;
+    background-color: black;
+    color: white;
+    text-align: center;
+    line-height: 35px;
+}
+
+footer>h3 {
+    margin: 10px;
+    padding: -1px;
+}
+
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+@media screen and (max-width: 767px) {
+    .table {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    .table>.table {
+        margin-bottom: 0;
+    }
+
+    .table>.table>thead>tr>th,
+    .table>.table>tbody>tr>th,
+    .table>.table>tfoot>tr>th,
+    .table>.table>thead>tr>td,
+    .table>.table>tbody>tr>td,
+    .table>.table>tfoot>tr>td {
+        white-space: nowrap;
+    }
+}
+
+th,
+td {
+    padding: 1px;
+}
+
+td {
+    border: .5px solid black;
+}
+
+tr:nth-child(even) {
+    background-color: #ddd;
+    color: black;
+}
+
+thead {
+    background-color: black;
+    color: white;
+    /* border-bottom: solid 5px rgb(143, 141, 141); */
+}
+
+.createdby {
+    margin-top: 150px;
+    text-align: right;
+}
