@@ -33,6 +33,15 @@ class AdminView extends Component
         return view('livewire.admin.admin-view', compact('anuncios', 'requests'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
+    public function disable($id)
+    {
+        $anuncio = Anuncio::find($id);
+        $anuncio['estado'] = 0;
+        $anuncio->save();
+        $this->emit('alert-anuncio-disabled', 'Has desactivado el anuncio.');
+
+    }
+
     public function cargando()
     {
         $this->cargado = true;

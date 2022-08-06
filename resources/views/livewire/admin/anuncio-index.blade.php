@@ -39,7 +39,7 @@
     <div class="row">
         <div class="col text-center table-responsive">
             @if (count((array) $anuncios))
-                <table class="table table-striped" Width=50%>
+                <table class="table table-striped table-anuncio" Width=50%>
                     <thead class="table-dark">
                         <tr>
                             <th>Título</th>

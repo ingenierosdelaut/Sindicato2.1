@@ -9,9 +9,8 @@
         <form wire:submit.prevent="crearAnuncio">
             <div class="card">
                 <div class="card-header">
-                    <h5>Para crear un nuevo anuncio solo hay que llenar los siguientes campos.</h5>
-                    <p style="color: black">En caso de no querer subir una imagen simplemente se llenan los campos y se
-                        da clic en publicar.</p>
+                    <h4>Para crear un nuevo anuncio solo hay que llenar los siguientes campos.</h4>
+                    <p style="color: black">Si no se desea incluir una imagen en el anuncio, simplemente se llenarán los campos de título y especificaciones y se dara clic en publicar.</p>
                 </div>
                 <div class="card-body">
                     @include('livewire.admin.formulario-anuncio')

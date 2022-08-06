@@ -4,7 +4,7 @@
             <div class="col">
                 <div class="form-group">
                     <input class="form-control" style="color: black;" wire:model="anuncio.titulo" type="text"
-                        id="comment" placeholder="Titulo del anuncio" name="text">
+                        id="comment" placeholder="Título del anuncio" name="text">
                     @error('anuncio.titulo')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -38,7 +38,7 @@
                             <a href="{{ route('admin.anuncios') }}" type="button"
                                 class="float-left btn btn-dark">Registros</a>
                             <button wire:loading.attr="disabled" wire:target="url_img"
-                                class="float-right btn btn-success"><i class="fa fa-save"></i>
+                                class="float-right btn btn-success publicar"><i class="fa fa-save"></i>
                                 Publicar</button>
                         </div>
                     </div>

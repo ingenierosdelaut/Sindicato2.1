@@ -28,7 +28,7 @@ class DescargasIndex extends Component
             ->orwhere('apellido', 'LIKE', '%' . $this->search . '%')
             ->select(
                 'descargas.*',
-                'documentos.*',
+                'documentos.titulo',
                 'usuarios.nombre',
                 'usuarios.apellido'
             )->orderBy('descargas.created_at', 'asc')->paginate(5);

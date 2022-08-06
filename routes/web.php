@@ -98,7 +98,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //requests usuarios
     Route::get('/usuario/solicitud', RequestCreate::class)->name('requests.create');
-    Route::get('/usuario/solicitud/{request}/delete', RequestEdit::class)->name('requests.delete');
 
     //Anuncios usuarios
     Route::get('/usuario/anuncios', AnunciosIndex::class)->name('anuncios.index');

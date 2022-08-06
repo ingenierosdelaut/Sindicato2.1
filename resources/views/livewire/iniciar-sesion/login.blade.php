@@ -8,14 +8,12 @@
 
         <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <!-- Los iconos tipo Solid de Fontawesome-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-        <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script>
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <!-- Nuestro css-->
         <link rel="stylesheet" type="text/css" href="{{ asset('static/css/login.css') }}" th:href="@{/css/index.css}">
+        <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
     </head>
 
     <body>
@@ -28,9 +26,10 @@
                     <form wire:submit.prevent="login" class="col-12">
 
                         <div class="form-group" id="user-group">
-                            <input wire:model="email" type="email" class="form-control"
+                            <input wire:model="email" type="email" class="form-control correo"
                                 placeholder="Ingresa tu usuario" />
                             @error('email')
+                                x
                                 <b class="text-danger">{{ $message }}</b>
                             @enderror
                         </div>
@@ -42,13 +41,18 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-success">Iniciar sesion</button>
-                        <a href="{{ route('index') }}" class="btn btn-secondary"></i>Inicio</a>
+                        <button type="submit" class="btn btn-success" style="background-color: #0c8461">Iniciar
+                            Sesión</button>
+                        <a href="{{ route('index') }}" class="btn btn-secondary"></i>Página Principal</a>
 
 
                     </form>
                 </div>
             </div>
         </div>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script>
     </body>
 </div>

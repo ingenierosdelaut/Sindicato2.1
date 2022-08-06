@@ -2,7 +2,6 @@
 
     <head>
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
-
     </head>
 
     <!-- Page Content  -->
@@ -21,9 +20,9 @@
                     </div>
                     <br>
                     <div class="card-footer">
-                        <button class="float-right btn btn-success" style="background-color: #0c8461"><i
+                        <button class="float-right btn btn-success save"><i
                                 class="fa fa-save"></i> Guardar</button>
-                        <a href="{{ route('admin.usuarios') }}" class="btn btn-secondary"><i class="fa fa-home"></i>
+                        <a href="{{ route('admin.usuarios') }}" class="btn btn-dark"><i class="fa fa-home"></i>
                             Regresar</a>
                     </div>
                 </div>
@@ -32,5 +31,5 @@
         </form>
     </div>
 
-    
+
 </div>

@@ -21,8 +21,8 @@
                         </div>
                         <br>
                         <div class="card-footer">
-                            <button class="float-right btn btn-success"><i class="fa fa-save"></i> Guardar</button>
-                            <a href="{{ route('admin.usuarios') }}" class="btn btn-secondary"><i class="fa fa-home"></i>
+                            <button class="float-right btn btn-success save"><i class="fa fa-save"></i> Guardar</button>
+                            <a href="{{ route('admin.usuarios') }}" class="btn btn-dark"><i class="fa fa-home"></i>
                                 Regresar</a>
                         </div>
                     </div>

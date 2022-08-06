@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Exports\FilterUserExport;
 use App\Exports\UsuariosExport;
+use App\Exports\UsuariosExports;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\App;
 use Livewire\Component;
@@ -25,10 +27,14 @@ class UsuarioIndex extends Component
     public function render()
     {
         $usuarios = ($this->cargado == true) ? Usuario::where('nombre', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('departamento', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('tipo_agremiado', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('nombre', 'LIKE', '%' . $this->search . '%')
             ->orwhere('apellido', 'LIKE', '%' . $this->search . '%')
             ->orwhere('estado', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('puesto', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('puestoA', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('puestoD', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('carrera', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('departamento', 'LIKE', '%' . $this->search . '%')
             ->paginate(10) : [];
         return view('livewire.admin.usuario-index', compact('usuarios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
@@ -45,7 +51,21 @@ class UsuarioIndex extends Component
 
     public function exportExcel()
     {
-        return Excel::download(new UsuariosExport, 'usuarios.xlsx');
+        // $users = app(Usuario::class)->newQuery();
+
+        // if (request()->has('search') && !empty(request()->get('search'))) {
+        //     $search = request()->query('search');
+        //     $users->where(function ($query) use ($search) {
+        //         $query->where('nombre', 'LIKE', "%{$search}%")
+        //             ->orWhere('apellido', 'LIKE', "%{$search}%")
+        //             ->orWhere('estado', 'LIKE', "%{$search}%")
+        //             ->orWhere('tipo_agremiado', 'LIKE', "%{$search}%")
+        //             ->orWhere('puestoA', 'LIKE', "%{$search}%")
+        //             ->orWhere('puestoD', 'LIKE', "%{$search}%")
+        //             ->orWhere('carrera', 'LIKE', "%{$search}%");
+        //     });
+        // }
+        return Excel::download(new UsuariosExports, 'usuarios.xlsx');
     }
 
 

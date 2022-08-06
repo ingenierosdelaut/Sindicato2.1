@@ -18,10 +18,10 @@
                     Generar reporte
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" target='a_blank' href="{{ route('admin.descargas.pdf') }}" type="button"><i
-                            class="fa fa-file-pdf"></i> PDF </a>
-                    <a class="dropdown-item" target='a_blank' href="{{ route('admin.descargas.excel') }}" type="button"><i
-                            class="fa fa-file-excel-o"></i>
+                    <a class="dropdown-item" target='a_blank' href="{{ route('admin.descargas.pdf') }}"
+                        type="button"><i class="fa fa-file-pdf"></i> PDF </a>
+                    <a class="dropdown-item" target='a_blank' href="{{ route('admin.descargas.excel') }}"
+                        type="button"><i class="fa fa-file-excel-o"></i>
                         Excel</a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Documento</th>
-                            <th>Fecha</th>
+                            <th>Fecha de descarga</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -4,8 +4,6 @@
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
     </head>
 
-
-
     <!-- Page Content  -->
     <div>
         <div class="row g-2">
@@ -36,12 +34,13 @@
         <div class="row">
             <div class="col text-center table-responsive">
                 @if (count((array) $requests))
-                    <table class="table table-striped" cellpadding="50">
+                    <table class="table table-striped">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Estado</th>
-                                <th scope="col">Se solícito</th>
+                                <th scope="col">Día Solicitado</th>
+                                <th>Día de la solicitud</th>
                                 <th scope="col">Motivo</th>
                                 <th scope="col">Acciones</th>
                             </tr>
@@ -61,11 +60,13 @@
                                         </td>
                                     @endif
                                     <!--Fecha-->
+                                    <td>{{ $request->fecha }}</td>
                                     <td>{{ $request->created_at }}</td>
+
                                     <!--Motivo-->
                                     @if ($request->motivo != null)
                                         <td>
-                                            <div style="width: 680px; overflow: hidden;">
+                                            <div style="width: 600px; overflow: hidden;">
                                                 {{ $request->motivo }}
                                             </div>
                                         </td>
@@ -76,10 +77,10 @@
                                     @endif
                                     <!--Acciones-->
                                     @if ($request->estado == 0)
-                                        <td>
+                                        <td class="acciones">
                                             <button wire:click="aceptar({{ $request->id }})" type="button"
-                                                class="mb-1 btn btn-sm btn-success acep">Aceptar</button>
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                class="btn btn-sm btn-success acep">Aceptar</button>
+                                            <button type="button" class="btn btn-sm btn-danger dene" data-bs-toggle="modal"
                                                 data-dismiss="modal" data-bs-target="#exampleModal{{ $request->id }}"
                                                 data-backdrop="false" data-bs-whatever="@mdo">Denegar</button>
                                         </td>
@@ -97,7 +98,7 @@
                                             <form wire:submit="motivo">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title text-center" id="exampleModalLabel">
-                                                        Escribir el motivo por el cual se denego
+                                                        Escribir el motivo por el cual se denegó
                                                         la solicitud</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close">&times;</button>
@@ -105,14 +106,14 @@
                                                 <div class="modal-body">
                                                     <h3>Solicitante:</h3>
                                                     <p style="color: black"><b>{{ $request->nombre }}
-                                                            {{ $request->apellido }}</b> para el dia
+                                                            {{ $request->apellido }}</b> para el día
                                                         <b>{{ $request->fecha }}</b>
                                                     </p>
                                                     <form>
                                                         <div class="mb-3">
                                                             <label style="color: black" for="recipient-name"
                                                                 class="col-form-label">Especificaciones:</label>
-                                                            <div class="contador" id="caracters"></div>
+                                                            <div wire:ignore.self class="contador" id="caracters"></div>
                                                             <textarea id="contar" wire:model="request.motivo" placeholder="Ejemplo: De denego porque..." type="text"
                                                                 maxlength="200" class="form-control"></textarea>
                                                             @error('request.motivo')
@@ -124,7 +125,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button wire:click="motivo({{ $request->id }})" type="button"
-                                                        class="btn btn-success">Enviar</button>
+                                                        class="btn btn-success" style="background-color: #0c8461; border: none;">Enviar</button>
                                                 </div>
                                             </form>
                                         </div>

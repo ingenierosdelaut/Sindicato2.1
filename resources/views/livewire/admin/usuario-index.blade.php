@@ -9,15 +9,15 @@
         <div class="col mb-1">
             <div class="input-group">
                 <span class="input-group-text"><i class="fa fa-search"></i></span>
-                <input wire:model="search" type="text" class="form-control" placeholder="Buscar">
+                <input wire:model="search" name="search" id="search" type="text" class="form-control"
+                    placeholder="Buscar">
             </div>
         </div>
 
         <div class="col-6 mt-2">
             <div class="dropdown">
-                <button type="button" style="background-color: #0c8461"
-                    class="float-right mr-1 btn btn-sm btn-success dropdown-toggle user" data-toggle="dropdown"><i
-                        class="fa fa-user-plus"></i>
+                <button type="button" class="float-right mr-1 btn btn-sm btn-success dropdown-toggle user"
+                    data-toggle="dropdown"><i class="fa fa-user-plus"></i>
                     Crear nuevo usuario
                 </button>
                 <div class="dropdown-menu">
@@ -25,7 +25,7 @@
                             class="fa fa-user"></i> Agremiado </a>
                     <a class="dropdown-item" href="{{ route('admin.create') }}" type="button"> <i
                             class="fa fa-address-book"></i>
-                        SUT Admin</a>
+                        SUTUT Admin</a>
                 </div>
             </div>
 
@@ -53,9 +53,11 @@
                     <thead class="table-dark ">
                         <tr>
                             <th>Nombre</th>
-                            <th>Puesto</th>
-                            <th>Departamento</th>
+                            <th>Tipo de agremiado</th>
+                            <th>Puesto Docente</th>
                             <th>Carrera</th>
+                            <th>Departamento</th>
+                            <th>Puesto Administrativo</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
@@ -63,11 +65,19 @@
                     <tbody>
                         @foreach ($usuarios as $usuario)
                             <tr>
-                                <td scope="row">{{ $usuario->nombre }}
-                                    {{ $usuario->apellido }} </td>
-                                <td>{{ $usuario->puesto }}</td>
-                                <td>{{ $usuario->departamento }}</td>
+                                @if ($usuario->is_admin == 1)
+                                    <td scope="row"><b>{{ $usuario->nombre }}
+                                            {{ $usuario->apellido }} </b> </td>
+                                @else
+                                    <td scope="row">{{ $usuario->nombre }}
+                                        {{ $usuario->apellido }} </td>
+                                @endif
+
+                                <td>{{ $usuario->tipo_agremiado }}</td>
+                                <td>{{ $usuario->puestoD }}</td>
                                 <td>{{ $usuario->carrera }}</td>
+                                <td>{{ $usuario->departamento }}</td>
+                                <td>{{ $usuario->puestoA }}</td>
                                 @if ($usuario->estado == 1)
                                     <td><span class="badge badge-pill badge-success">Activo</span></td>
                                 @elseif ($usuario->estado == 0)
@@ -76,10 +86,10 @@
 
                                 <td>
                                     <a type="button" href="{{ route('admin.show-user', $usuario) }}"
-                                        title="Informacion del usuario(Vista previa)" class="btn btn-info btn-sm"><i
+                                        title="Información del usuario(Vista previa)" class="btn btn-info btn-sm"><i
                                             class="fa fa-eye"></i></a>
                                     <a type="button" href="{{ route('admin.user-edit', $usuario) }}"
-                                        title="Editar informacion del usuario" class="btn btn-primary btn-sm edit"><i
+                                        title="Editar información del usuario" class="btn btn-primary btn-sm edit"><i
                                             class="fa fa-edit"></i></a>
                                     @if ($usuario->estado == 1)
                                         <button wire:click="disable({{ $usuario->id }})" type="button"

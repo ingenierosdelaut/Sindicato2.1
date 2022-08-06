@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>Editar usuario</h2>
-                        <p style="color: black">Para editar la informacion de un usuario simplemente habra que borrar la
+                        <p style="color: black">Para editar la información de un usuario simplemente habra que borrar la
                             informacion que
                             venga en
                             el

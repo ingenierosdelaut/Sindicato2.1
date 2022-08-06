@@ -1,4 +1,5 @@
 <div>
+
     <head>
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
     </head>
@@ -10,16 +11,17 @@
                     <h4>Editar Información</h4>
                 </div>
                 <div class="card-body">
-                    <p style="color: black">Para editar información habra que borrar el texto que se muestra en el campo que se quiera cambiar y escribir el nuevo dato.</p>
+                    <p style="color: black">Para cambiar la información, es necesario cambiar los datos que se encuentran
+                        en los campos debajo.</p>
                     @include('livewire.admin.formulario-admin-edit')
 
                 </div>
                 <div class="card-footer">
-                    <button type="submit" style="background-color: #177c67" class="float-right btn btn-success">Guardar</button>
-                    <a class="btn btn-dark" href="{{route('admin.anuncios')}}">Regresar</a>
+                    <button type="submit"
+                        class="float-right btn btn-success save">Guardar</button>
+                    <a class="btn btn-dark" href="{{ route('admin.anuncios') }}">Regresar</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
-

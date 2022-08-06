@@ -1,5 +1,5 @@
 .search {
-    width: 80px;
+    width: 80%;
     border-radius: 4px;
     margin-top: 10px;
     margin-left: 30px;
@@ -19,6 +19,7 @@ label {
     padding: 0;
     margin: 0;
     color: black;
+    font-weight: bold;
 }
 
 select {
@@ -26,8 +27,16 @@ select {
     background-color: lightgray;
     border: 1px solid #0c8461;
     width: 100%;
-    height: auto;
     border-radius: 5px;
+}
+
+.publicar {
+    background-color: #177c67;
+    border: none;
+}
+
+.publicar:hover {
+    background-color: #0e5244;
 }
 
 input[type=text] {
@@ -47,8 +56,20 @@ input::placeholder {
     opacity: 1;
 }
 
+input[type=email] {
+    background-color: lightgray;
+    border-radius: 10px;
+    border: 1px solid #0c8461;
+    box-sizing: border-box;
+}
+
+input[type=email]:focus {
+    background-color: #177c67;
+    color: white;
+}
+
 input[type=password] {
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: lightgray;
     border: 1px solid #0c8461;
 }
@@ -64,7 +85,6 @@ input[type=date] {
     background-color: lightgray;
     border: 1px solid #0c8461;
     width: 100%;
-    height: 100%;
     padding: 5px;
     margin: 0;
 }
@@ -73,7 +93,6 @@ input[type=date]:focus {
     border-radius: 5px;
     border: 1px solid #0c8461;
     width: 100%;
-    height: 100%;
 }
 
 input[type=number] {
@@ -127,7 +146,6 @@ div#input-file {
     height: 30px;
     background-color: #177c67;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 div#input-file:hover {
@@ -143,6 +161,7 @@ input#imagen {
     width: 100%;
     height: 100%;
     opacity: 0;
+    cursor: pointer;
 }
 
 .request {
@@ -151,7 +170,8 @@ input#imagen {
     left: 300px;
 }
 
-table td {
+
+.table-anuncio {
     white-space: nowrap;
 }
 
@@ -187,20 +207,56 @@ table {
 }
 
 tr:hover td {
-    background-color: #0c8461;
+    background-color: #0e5244;
     color: white;
 }
 
 .acep {
     margin-top: 3px;
+    background-color: #177c67;
+    border: none;
+    height: 100%;
 }
+
+.acep:hover {
+    background-color: #0c8461;
+}
+
+.save {
+    background-color: #177c67;
+    border: none;
+}
+
+.save:hover {
+    background-color: #0c8461;
+}
+
+
 
 .edit {
     margin: 2px;
 }
 
+.acciones {
+    display: flex;
+}
+
+.acep {
+    margin: 2px;
+}
+
+.dene {
+    margin: 2px;
+}
+
 .user {
     margin: 2px;
+    background-color: #177c67;
+    border: none;
+}
+
+.user:hover {
+    background-color: #0c8461;
 }
 
 .report {

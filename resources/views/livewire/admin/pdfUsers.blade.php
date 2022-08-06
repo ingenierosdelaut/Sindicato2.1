@@ -30,12 +30,23 @@
                     <th scope="col"><b>Nombre</b></th>
                     <th scope="col"><b>Apellido</b></th>
                     <th scope="col"><b>Correo</b></th>
+                    <th scope="col"><b>Domicilio</b></th>
+                    <th scope="col"><b>Teléfono</b></th>
+                    <th scope="col"><b>Estado Civil</b></th>
+                    <th scope="col"><b>Nacionalidad</b></th>
+                    <th scope="col"><b>Ciudad</b></th>
+                    <th scope="col"><b>Colonia</b></th>
+                    <th scope="col"><b>Tipo de agremiado</b></th>
+                    <th scope="col"><b>Carrera</b></th>
+                    <th scope="col"><b>Tipo de docente</b></th>
                     <th scope="col"><b>Departamento</b></th>
                     <th scope="col"><b>Puesto</b></th>
-                    <th scope="col"><b>Carrera</b></th>
+                    <th scope="col"><b>Clave de Elector</b></th>
                     <th scope="col"><b>Curp</b></th>
                     <th scope="col"><b>RFC</b></th>
-                    <th scope="col"><b>Clave de Elector</b></th>
+                    <th scope="col"><b>Fecha nacimiento</b></th>
+                    <th scope="col"><b>Fecha de ingreso</b></th>
+                    <th scope="col"><b>Fecha de afiliación</b></th>
                 </tr>
             </thead>
             <tbody>
@@ -44,17 +55,24 @@
                         <td scope="row">{{ $usuario->nombre }}</td>
                         <td>{{ $usuario->apellido }}</td>
                         <td>{{ $usuario->email }}</td>
+                        <td>{{ $usuario->domicilio }}</td>
+                        <td>{{ $usuario->telefono }}</td>
+                        <td>{{ $usuario->estadoCivil }}</td>
+                        <td>{{ $usuario->nacionalidad }}</td>
+                        <td>{{ $usuario->ciudad }}</td>
+                        <td>{{ $usuario->colonia }}</td>
+                        <td>{{ $usuario->tipo_agremiado }}</td>
+                        <td>{{ $usuario->carrera}}</td>
+                        <td>{{ $usuario->puestoD }}</td>
                         <td>{{ $usuario->departamento }}</td>
-                        <td>{{ $usuario->puesto }}</td>
-                        <td>{{ $usuario->carrera }}</td>
+                        <td>{{ $usuario->puestoA }}</td>
+                        <td>{{ $usuario->ine }}</td>
                         <td>{{ $usuario->curp }}</td>
                         <td>{{ $usuario->rfc }}</td>
-                        <td>{{ $usuario->ine }}</td>
-                        {{-- @if ($usuario->estado == 1)
-                            <td><span class="badge badge-pill badge-success">Activo</span></td>
-                        @elseif ($usuario->estado == 0)
-                            <td><span class="badge badge-pill badge-danger">Inactivo</span></td>
-                        @endif --}}
+                        <td>{{ $usuario->nacimiento }}</td>
+                        <td>{{ $usuario->fecha_ingreso }}</td>
+                        <td>{{ $usuario->fecha_afiliacion }}</td>
+
 
                     </tr>
                 @endforeach

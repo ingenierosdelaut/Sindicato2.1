@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
     </head>
 
-    <!-- Page Content  -->
+    <!-- Header  -->
     <div>
         <div class="row">
             <div class="col-4 mb-2">
@@ -17,8 +17,10 @@
             <div class="col mt-2">
 
                 <button type="button" class="float-right btn btn-sm btn-success user" data-bs-toggle="modal"
-                    data-dismiss="modal" data-bs-target="#Modaldoc" data-backdrop="false" data-bs-whatever="@mdo"><i
-                        class="fa fa-plus-square"></i> Subir Nuevo Documento</button>
+                    data-dismiss="modal" data-bs-target="#Modaldoc" style="background-color: #177c67; border: none;"
+                    data-backdrop="false" data-bs-whatever="@mdo"><i class="fa fa-plus-square"></i> Subir Nuevo
+                    Documento</button>
+
 
                 <div class="dropdown">
                     <button type="button" class="float-right mr-1 btn btn-sm btn-dark dropdown-toggle report"
@@ -26,20 +28,42 @@
                         Generar reporte
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.descargas.pdf') }}" type="button"><i
-                                class="fa fa-file-pdf"></i> PDF </a>
-                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.documentos.excel') }}" type="button"><i
-                                class="fa fa-file-excel-o"></i>
+                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.descargas.pdf') }}"
+                            type="button"><i class="fa fa-file-pdf"></i> PDF </a>
+                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.documentos.excel') }}"
+                            type="button"><i class="fa fa-file-excel-o"></i>
                             Excel</a>
                     </div>
                 </div>
 
             </div>
         </div>
+        <div wire:ignore.self class="modal" data-backdrop="static" id="Modaldoc" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content text-center">
+                    <form action="{{ route('fileUpload') }}" method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Subir Documento</h5>
+                            <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal"
+                                aria-label="Close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div>
+                                    @include('livewire.admin.documento-upload')
+                                </div>
+                            </form>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-
+    {{-- Page content --}}
     <div class="row">
         <div class="col text-center">
             @if (count((array) $documentos))
@@ -79,7 +103,7 @@
                                 id="exampleModal{{ $documento->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <div class="modal-content text-center">
+                                    <div class="modal-content">
                                         <form>
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">¿Deseas eliminar
@@ -91,19 +115,19 @@
                                             <div class="modal-body">
                                                 <form>
                                                     <div class="mb-3">
-                                                        <h2>Titulo del documento</h2>
-                                                        <p style="color: black">{{ $documento->titulo }}</p>
+                                                        <h3>Título del documento:</h3>
+                                                        <p><b>{{ $documento->titulo }}</b></p>
 
-                                                        <h2>Dia en que se subio el documento</h2>
-                                                        <p style="color: black">{{ $documento->created_at }}
+                                                        <h3>Día en que se subió el documento:</h3>
+                                                        <p><b>{{ $documento->created_at }}</b>
                                                         </p>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 @if ($documento->estado == 1)
-                                                    <button wire:click="desactivar({{ $documento->id }})" type="button"
-                                                        class="btn btn-success">Desactivar</button>
+                                                    <button wire:click="desactivar({{ $documento->id }})"
+                                                        type="button" style="background-color: #177c67; border: none;" class="btn btn-success">Desactivar</button>
                                                 @endif
                                             </div>
                                         </form>
@@ -126,36 +150,13 @@
                     </div>
                 </div>
             @endif
-
         </div>
-
 
     </div>
 
     {{ $cargado == true ? $documentos->links() : null }}
 
     <!--Modal-->
-    <div wire:ignore.self class="modal" data-backdrop="static" id="Modaldoc" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content text-center">
-                <form action="{{ route('fileUpload') }}" method="post" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">¿Deseas eliminar este anuncio?</h5>
-                        <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal"
-                            aria-label="Close">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div>
-                                @include('livewire.admin.documento-upload')
-                            </div>
-                        </form>
-                    </div>
 
-                </form>
-            </div>
-        </div>
-    </div>
 
 </div>

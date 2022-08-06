@@ -23,8 +23,11 @@
 
         <section id="banner">
             <img src="{{ asset('static/images/sututslrc.png') }}" alt="">
-            <p class="text-center" style="font-size: 30px">Sindicato Único de Trabajadores de la Universidad Tecnológica
-                de San Luis Río Colorado.</p>
+            <div class="container text">
+                <p class="texto1">Sindicato Único de Trabajadores de la
+                    Universidad Tecnológica
+                    de San Luis Río Colorado.</p>
+            </div>
             <ul class="actions special">
                 <!-- <li><a href="#" class="button primary">Sign Up</a></li>
                     <li><a href="#" class="button">Learn More</a></li> -->
@@ -76,13 +79,12 @@
                 </div>
                 <div class="col-6 col-12-narrower">
                     <section class="box special">
-                        <span class="image featured"><img class="imagen3 img-fluid" src="{{ asset('static\images\UT.png') }}"
-                                alt="" height="286 px" /></span>
-                        <h3>Forma parte del sindicato</h3>
-                        <p class="text-center">A. Llena la solicitud de ingreso, proporcionando los datos que se pidan
-                            en las formas
-                            correspondientes, por conducto del Comité Ejecutivo.</p>
-                        <p>B. Acreditar con los documentos respectivos los requisitos establecidos en el Artículo 6.</p>
+                        <span class="image featured"><img class="imagen3 img-fluid"
+                                src="{{ asset('static\images\UT.png') }}" alt="" height="286 px" /></span>
+                        <h3>Creación del sindicato</h3>
+                        <p class="text-center">Para la historia, se crea el Sindicato de Trabajadores en la Universidad
+                            Tecnológica de San Luis Río Colorado (SUTUTSLRC), esto con la finalidad de ofrecer siempre
+                            la mejor calidad a los trabajadores con un comité ejecutivo.</p>
                         <ul class="actions special">
                         </ul>
                     </section>
@@ -91,13 +93,11 @@
                 <div class="col-6 col-12-narrower">
                     <section class="box special">
                         <span class="image featured"><img class="imagen4 img-fluid"
-                                src="{{ asset('static\images\UTSLRC.jfif') }}" alt=""
-                                height="286 px" /></span>
+                                src="{{ asset('static\images\UTSLRC.jfif') }}" alt="" height="286 px" /></span>
                         <h3>Elecciones</h3>
-                        <p class="text-center">Los integrantes del Comité Ejecutivo, Comisión de Vigilancia, Honor y
-                            Justicia y Comisión de
-                            Honor y Justicia, los representantes de los PTC, PA y ADMINISTRATIVOS serán electos por dos
-                            años. Sin embargo, continuarán en su gestión y representación sindical en tanto no se halla
+                        <p class="text-center">Los integrantes del comité ejecutivo, comisión de vigilancia, honor y
+                            justicia y los representantes de los PTC, PA y administrativos serán electos por dos años.
+                            Sin embargo, continuarán en su gestión y representación sindical en tanto no se halla
                             electos a los sustitutos.</p>
                         <ul class="actions special">
                         </ul>

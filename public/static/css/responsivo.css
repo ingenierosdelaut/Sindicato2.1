@@ -1,11 +1,28 @@
-.row{
+.row {
     width: 100%;
     max-width: 1500px;
-
 }
 
-.box{
+.box {
     max-width: 1000px;
 }
 
+.texto1 {
+    background-color: #444;
+    line-height: normal;
+    border: 100px;
+    border-radius: 100px;
+}
 
+.text {
+    font-size: 26px;
+    margin: auto;
+    max-width: 1200px;
+}
+
+@media (max-width: 500px) {
+    .text {
+        width: 50%;
+        font-size: 15;
+    }
+}

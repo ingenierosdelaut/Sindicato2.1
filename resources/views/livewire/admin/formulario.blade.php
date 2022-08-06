@@ -1,9 +1,25 @@
 <div class="container contenedor">
 
+    <head>
+        <style>
+            select[name=carrera] {
+                display: none;
+            }
+
+            select[name=puestoD] {
+                display: none;
+            }
+
+            input[name=puestoA] {
+                display: none;
+            }
+        </style>
+    </head>
+
     <form class="form">
 
         <div class="jumbotron">
-            <h3>Información personal</h3>
+            <h3>Información del agremiado</h3>
 
             <div class="row g-3">
                 <div class="col">
@@ -22,7 +38,7 @@
 
                 <div class="col">
                     <input class="form-control" wire:model="usuario.email" placeholder="Ejemplo@hotmail.com"
-                        type="text">
+                        type="email">
                     @error('usuario.email')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -47,7 +63,7 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <select class="relieve-options" wire:model="usuario.estadoCivil" name="estadovicil">
+                    <select class="" wire:model="usuario.estadoCivil" name="estadovicil">
                         <option>Estado civil</option>
                         <option value="Soltero">Soltero/a</option>
                         <option value="Casado">Casado/a</option>
@@ -81,18 +97,48 @@
                 </div>
             </div>
 
-            <div class="row g-2 mt-2">
+            {{-- Validacion del tipo de agremiado --}}
+            <div class="row g-3 mt-2">
                 <div class="col">
-                    <select id="departamentoTrabajo" wire:model="usuario.departamento">
-                        <option>Departamento de trabajo</option>
+                    <select wire:ignore.self id="agremiado" name="agremiado" wire:model="usuario.tipo_agremiado">
+                        <option>Tipo de agremiado</option>
                         <option value="Administrativo">Administrativo</option>
                         <option value="Docente">Docente</option>
-                        <option value="Ambos">Ambos</option>
+                        <option value="Administrativo y Docente">Administrativo y Docente</option>
                     </select>
+                    @error('usuario.tipo_agremiado')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="col">
-                    <select class="relieve-options" id="carrera" wire:model="usuario.carrera">
+                    <input wire:ignore.self class="form-control" id="puestoA" name="puestoA"
+                        wire:model="usuario.puestoA" type="text" placeholder="Puesto">
+                    @error('usuario.puestoA')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="col">
+                    <select wire:ignore.self wire:model="usuario.departamento" name="departamento" id="departamento">
+                        <option>Departamento</option>
+                        <option value="Servicios escolares">Servicios escolares</option>
+                        <option value="Planeación">Planeación</option>
+                        <option value="Administración y Finanzas">Administración y Finanzas</option>
+                        <option value="Vinculación">Vinculación</option>
+                    </select>
+                    @error('usuario.departamento')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                {{-- else --}}
+
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-4">
+                    <select wire:ignore.self id="carrera" name="carrera" wire:model="usuario.carrera">
                         <option>Carrera</option>
                         <option value="Tecnologias de la Información">Tecnologias de la infomación</option>
                         <option value="Operaciones Comerciales">Operaciones comerciales internacionales</option>
@@ -106,21 +152,17 @@
                     @enderror
                 </div>
 
-                <div class="col">
-                    <input class="form-control" id="puesto" wire:model="usuario.puesto" type="text"
-                        placeholder="Puesto">
-                    {{-- <select  class="relieve-options" wire:model="usuario.area" name="area"
-                    aria-placeholder="Elegir">
-                    <option>Area</option>
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Docente">Docente</option>
-                </select> --}}
-                    @error('usuario.puesto')
+
+                <div class="col-4">
+                    <select wire:ignore.self id="puestoD" name="puestoD" wire:model="usuario.puestoD">
+                        <option value="">Tipo de Docente</option>
+                        <option value="PTC">PTC</option>
+                        <option value="PA">PA</option>
+                    </select>
+                    @error('usuario.puestoD')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-
                 </div>
-
             </div>
 
             <div class="row g-3 mt-2">
@@ -180,6 +222,23 @@
                     @enderror
                 </div>
             </div>
+
+            <div class="row mt-2 ">
+                <div class="col-4">
+                    <select wire:model="usuario.gradoMax">
+                        <option>Grado Máximo de estudios</option>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Secundaria">Secundaria</option>
+                        <option value="Preparatoria">Preparatoria</option>
+                        <option value="Lic./Ing.">Lic./Ing.</option>
+                        <option value="Maestria">Maestría</option>
+                        <option value="Doctorado">Doctorado</option>
+                    </select>
+                    @error('usuario.gradoMax')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
         </div>
 
         <div class="jumbotron mt-3">
@@ -202,7 +261,9 @@
                     </div>
                     <div class="col">
                         <input type="text" wire:model="usuario.telContacto" class="form-control"
-                            placeholder="Telefono" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="10">
+                            placeholder="Telefono"
+                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                            maxlength="10">
                         @error('usuario.telContacto')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -216,24 +277,32 @@
 
 
     <script>
-        document.getElementById('departamentoTrabajo').addEventListener('change', function() {
+        const agremiadotype = document.querySelector("#agremiado");
+        const carrera = document.querySelector("[name=carrera]");
+        const puestoA = document.querySelector("[name=puestoA]");
+        const puestoD = document.querySelector("[name=puestoD]");
+        const departamento = document.querySelector("[name=departamento]");
 
-            document.getElementById('carrera').hide(); //oculta el boton siguiente
-            document.getElementById('puesto').hide(); //oculta el boton siguiente
+        departamento.style.display = 'none';
 
-            if (this.value === 'Docente') //si la opcion seleccionada es activo
-            {
-                document.getElementById('puesto').hide(); //oculta el boton agregar
-                document.getElementById('carrera').show(); //muestra el boton siguiente
+        agremiadotype.addEventListener("change", () => {
+            if (agremiadotype.value === "Docente") {
+                puestoD.style.display = 'block';
+                carrera.style.display = 'block';
+                puestoA.style.display = 'none';
+                departamento.style.display = 'none';
 
-            } else if (this.value === 'Administrativo') // en caso contrario, que sea jubilado etc
-            {
-                document.getElementById('carrera').show(); //muestra el boton agregar
-                document.getElementById('puesto').hide(); //oculta el boton siguiente
+            } else if (agremiadotype.value === "Administrativo") {
+                puestoA.style.display = 'block';
+                departamento.style.display = 'block';
+                puestoD.style.display = 'none';
+                carrera.style.display = 'none';
 
-            } else if (this.value === 'Ambos') {
-                document.getElementById('carrera').show(); //muestra el boton agregar
-                document.getElementById('puesto').show(); //muestra el boton agregar
+            } else if (agremiadotype.value === "Administrativo y Docente") {
+                puestoA.style.display = 'block';
+                puestoD.style.display = 'block';
+                carrera.style.display = 'block';
+                departamento.style.display = 'block';
             }
         });
     </script>

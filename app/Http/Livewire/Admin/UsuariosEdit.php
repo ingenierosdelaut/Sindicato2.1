@@ -9,18 +9,20 @@ use Livewire\WithFileUploads;
 
 class UsuariosEdit extends Component
 {
-
-    use WithFileUploads;
     public Usuario $usuario;
     public $confirm_password;
     public $password;
     public $rfc;
     public $curp;
     public $ine;
+    public $tipo_agremiado;
+    public $puestoA;
+    public $puestoD;
+    public $carrera;
+    public $departamento;
 
     public function render()
     {
-
         return view('livewire.admin.usuarios-edit')->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
@@ -31,6 +33,14 @@ class UsuariosEdit extends Component
         if ($this->password) {
             $this->usuario->password = Hash::make($this->password);
         }
+        if ($this->usuario->tipo_agremiado === 'Administrativo') {
+            $this->usuario->puestoD = null;
+            $this->usuario->carrera = null;
+        } elseif ($this->usuario->tipo_agremiado === 'Docente') {
+            $this->usuario->puestoA = null;
+            $this->usuario->departamento = null;
+        }
+
         $this->usuario->curp = strtoupper($this->usuario->curp);
         $this->usuario->rfc = strtoupper($this->usuario->rfc);
         $this->usuario->ine = strtoupper($this->usuario->ine);

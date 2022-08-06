@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
     <link rel="icon" href="{{ asset('static/images/sututslrc.png') }}">
-    <link rel="stylesheet" href="{{ asset('static/css/style.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
@@ -45,7 +44,7 @@
                         <a class="nav-link" href="{{ route('anuncios.index') }}">Anuncios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('requests.create') }}">Solicitud</a>
+                        <a class="nav-link" href="{{ route('requests.create') }}">Solicitudes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('documentos.index') }}">Documentos</a>

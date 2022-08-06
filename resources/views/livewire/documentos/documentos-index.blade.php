@@ -16,10 +16,8 @@
                                 <h5 class="card-title">{{ $documento->titulo }}</h5>
                                 <button wire:click="descarga({{ $documento->id }})" type="button"
                                     class="btn btn-primary mb-5"><i
-                                        class="glyphicon glyphicon-download">Descargar</i></button>
-                                {{-- <button wire:click="vista({{ $documento->id }})" type="button"
-                                    class="btn btn-info"><i class="glyphicon glyphicon-download">Vista
-                                        previa</i></button> --}}
+                                        class="glyphicon glyphicon-download"><i class="fa fa-download"></i> Descargar</i></button>
+
 
                             </div>
                         </div>

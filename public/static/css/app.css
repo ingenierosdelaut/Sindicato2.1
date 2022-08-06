@@ -4,7 +4,7 @@
 }
 
 body {
-    margin: -1cm 1cm 0cm;
+    margin: -1cm 1cm -15cm;
 }
 
 header {
@@ -49,33 +49,6 @@ table {
     border-collapse: collapse;
 }
 
-@media screen and (max-width: 767px) {
-    .table {
-        width: 100%;
-        margin-bottom: 15px;
-        overflow-y: hidden;
-        -ms-overflow-style: -ms-autohiding-scrollbar;
-    }
-
-    .table>.table {
-        margin-bottom: 0;
-    }
-
-    .table>.table>thead>tr>th,
-    .table>.table>tbody>tr>th,
-    .table>.table>tfoot>tr>th,
-    .table>.table>thead>tr>td,
-    .table>.table>tbody>tr>td,
-    .table>.table>tfoot>tr>td {
-        white-space: nowrap;
-    }
-}
-
-th,
-td {
-    padding: 1px;
-}
-
 td {
     border: .5px solid black;
 }
@@ -92,6 +65,6 @@ thead {
 }
 
 .createdby {
-    margin-top: 150px;
+    margin-top: 120 px;
     text-align: right;
 }

@@ -52,8 +52,10 @@
                                             <footer>
                                                 <a href="{{ route('admin.anuncio-edit', $anuncio) }}"><small
                                                         class="text-muted">Editar</a></small>
-                                                <a href="{{ route('admin.anuncio-delete', $anuncio) }}"><small
-                                                        class="text-muted">Desactivar</a></small>
+                                                <button wire:click="disable({{ $anuncio->id }})" type="button"
+                                                    title="Desactivar Anuncio" style="border: none;"><small
+                                                    class="text-muted">Desactivar</a></small>
+                                                </button>
                                                 <small class="float-right text-muted muted"><b>Creado el dia
                                                         {{ $anuncio->created_at }} por
                                                         {{ $anuncio->nombre }}</b></a></small>
