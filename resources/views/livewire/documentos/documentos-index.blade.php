@@ -15,10 +15,8 @@
                             <div class="card-body text-center mt-3">
                                 <h5 class="card-title">{{ $documento->titulo }}</h5>
                                 <button wire:click="descarga({{ $documento->id }})" type="button"
-                                    class="btn btn-primary mb-5"><i
+                                    class="btn btn-primary save mb-5"><i
                                         class="glyphicon glyphicon-download"><i class="fa fa-download"></i> Descargar</i></button>
-
-
                             </div>
                         </div>
                     </div>

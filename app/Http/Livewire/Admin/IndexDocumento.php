@@ -5,8 +5,11 @@ namespace App\Http\Livewire\Admin;
 use App\Exports\DocumentosExport;
 use App\Models\Documento;
 use App\Models\Request;
+use App\Models\Usuario;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Node\Block\Document;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -14,23 +17,25 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class IndexDocumento extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    use WithFileUploads;
+    // public $cargado = false;
+    public $url_doc;
+    public Documento $documento;
+    public $search = '';
+
     public function mount()
     {
         $this->documento = new Documento();
     }
 
-
-    public $cargado = false;
-    protected $paginationTheme = 'bootstrap';
-    use WithPagination;
-    use WithFileUploads;
-    public $search = '';
-    public $url_doc;
-
     public function render()
     {
-        $documentos = Documento::where('titulo', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('created_at', 'LIKE', '%' . $this->search . '%')->paginate(5);
+        $documentos =  Documento::where('titulo', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('created_at', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('estado', 'LIKE', '%' . $this->search . '%')
+            ->orderby('created_at', 'desc')->paginate(5);
         return view('livewire.admin.index-documento', compact('documentos'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
@@ -44,33 +49,26 @@ class IndexDocumento extends Component
         $this->emit('alert-documento-desactivar', 'Has desactivado el documento correctamente');
     }
 
-
-    public function fileUpload(Request $req)
+    public function generatePDF($search = null)
     {
-        $req->validate([
-            'file' => 'required|mimes:doc,docx,pdf|max:2048'
-        ]);
-        $fileModel = new Documento();
-        if ($req->file()) {
-            $fileName = $req->file->getClientOriginalName();
-            $filePath = $req->file('file')->storeAs('/documentos', $fileName, 'public');
-            $fileModel->titulo = $req->file->getClientOriginalName();
-            $fileModel->url_doc = $filePath;
-            $fileModel->save();
-            return back()
-                ->with('success', 'El documento ha sido guardado.')
-                ->with('file', $fileName);
+        $iduser = auth()->user()->id;
+        $data = Usuario::find($iduser);
+        $now = Carbon::now();
+        $date = $now->format('d-m-Y');
+
+        if ($search != '') {
+            $documentos = Documento::where('titulo', 'LIKE', '%' . $search . '%')
+                ->orwhere('created_at', 'LIKE', '%' . $search . '%')
+                ->orwhere('estado', 'LIKE', '%' . $search . '%')->get();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfDocumentos', ['documentos' => $documentos, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
+        } else {
+            $documentos = Documento::all();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfdocumentos', ['documentos' => $documentos, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
         }
-        return view('livewire.admin.documentos-upload');
-    }
-
-    public function generarPDF()
-    {
-        $documentos = Documento::all()
-            ->paginate();
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('livewire.admin.pdfSolicitudes', ['documentos' => $documentos]);
-        return $pdf->stream();
     }
 
     public function exportExcel()
@@ -79,13 +77,13 @@ class IndexDocumento extends Component
     }
 
 
+    // public function cargando()
+    // {
+    //     $this->cargado = true;
+    // }
+
     public function updatingSearch()
     {
         $this->resetPage();
-    }
-
-    public function cargando()
-    {
-        $this->cargado = true;
     }
 }

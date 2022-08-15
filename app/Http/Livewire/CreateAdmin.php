@@ -36,7 +36,7 @@ class CreateAdmin extends Component
         $this->usuario->estado = 1;
         $this->usuario->save();
         $this->emit('alert-user-admin-create', 'Has creado un nuevo administrador');
-        return redirect(route('login'));
+        return redirect(route('admin.usuarios'));
     }
 
 

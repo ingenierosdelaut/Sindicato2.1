@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Usuario;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;

@@ -29,10 +29,10 @@
                             <input wire:model="email" type="email" class="form-control correo"
                                 placeholder="Ingresa tu usuario" />
                             @error('email')
-                                x
                                 <b class="text-danger">{{ $message }}</b>
                             @enderror
                         </div>
+                        
                         <div class="form-group" id="password-group">
                             <input wire:model="password" type="password" class="form-control"
                                 placeholder="Ingresa tu contraseña" />

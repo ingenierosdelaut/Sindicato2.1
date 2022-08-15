@@ -1,3 +1,8 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="{{ asset('static/css/app.css') }}">
+</head>
+
 <div class="container">
     <h1><span style="color:#177c67">SUTUT</span><span style="color:grey">SLRC</span></h1>
 
@@ -7,10 +12,10 @@
 <table class="table text-center table-striped">
     <thead class="table-dark">
         <tr>
-            <td>ID</td>
-            <td>Nombre</td>
-            <td>Documento</td>
-            <td>Fecha</td>
+            <td><b>ID</b></td>
+            <td><b>Nombre</b></td>
+            <td><b>Documento</b></td>
+            <td><b>Fecha</b></td>
         </tr>
     </thead>
     <tbody>

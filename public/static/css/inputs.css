@@ -231,24 +231,6 @@ tr:hover td {
     background-color: #0c8461;
 }
 
-
-
-.edit {
-    margin: 2px;
-}
-
-.acciones {
-    display: flex;
-}
-
-.acep {
-    margin: 2px;
-}
-
-.dene {
-    margin: 2px;
-}
-
 .user {
     margin: 2px;
     background-color: #177c67;
@@ -266,3 +248,28 @@ tr:hover td {
 .jumbotron {
     padding: 25px;
 }
+
+.dropdown-item:hover{
+    background-color: #0c8461;
+}
+
+.alert{
+    width: 100%;
+    text-align: center;
+    background-color: #2b2c2c;
+    color: white;
+    /* box-shadow: 2px 3px 5px black; */
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5), 0 5px 5px 0 rgba(0, 0, 0, 0.20);
+}
+
+.button {
+    background-color: #0c8461;
+    border: none;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+

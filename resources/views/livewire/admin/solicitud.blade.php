@@ -20,7 +20,7 @@
                         Generar reporte
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.solicitudes.pdf') }}"
+                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.solicitudes.pdf', $search) }}"
                             type="button"><i class="fa fa-file-pdf"></i> PDF </a>
                         <a class="dropdown-item" target="a_blank" href="{{ route('admin.solicitudes.excel') }}"
                             type="button"><i class="fa fa-file-excel-o"></i>
@@ -66,7 +66,7 @@
                                     <!--Motivo-->
                                     @if ($request->motivo != null)
                                         <td>
-                                            <div style="width: 600px; overflow: hidden;">
+                                            <div style="width: 500px; overflow: hidden;">
                                                 {{ $request->motivo }}
                                             </div>
                                         </td>
@@ -77,10 +77,10 @@
                                     @endif
                                     <!--Acciones-->
                                     @if ($request->estado == 0)
-                                        <td class="acciones">
+                                        <td>
                                             <button wire:click="aceptar({{ $request->id }})" type="button"
                                                 class="btn btn-sm btn-success acep">Aceptar</button>
-                                            <button type="button" class="btn btn-sm btn-danger dene" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                                 data-dismiss="modal" data-bs-target="#exampleModal{{ $request->id }}"
                                                 data-backdrop="false" data-bs-whatever="@mdo">Denegar</button>
                                         </td>
@@ -100,7 +100,8 @@
                                                     <h5 class="modal-title text-center" id="exampleModalLabel">
                                                         Escribir el motivo por el cual se denegó
                                                         la solicitud</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    <button type="button" class="bt-sm btn-close"
+                                                        style="border: 1px solid black; border-radius: 4px;" data-bs-dismiss="modal"
                                                         aria-label="Close">&times;</button>
                                                 </div>
                                                 <div class="modal-body">
@@ -124,8 +125,11 @@
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button wire:click="motivo({{ $request->id }})" type="button"
-                                                        class="btn btn-success" style="background-color: #0c8461; border: none;">Enviar</button>
+                                                    @if ($request->motivo == '')
+                                                        <button wire:click="motivo({{ $request->id }})" type="button"
+                                                            class="btn btn-success"
+                                                            style="background-color: #0c8461; border: none;">Enviar</button>
+                                                    @endif
                                                 </div>
                                             </form>
                                         </div>

@@ -65,7 +65,8 @@
                             class="fa fa-cog" aria-hidden="true"></i> Opciones</a>
                     <ul class="dropdown-menu app text-left">
                         <li><a class="dropdown-item" href="{{ route('admin.edit') }}"> <i
-                                    class="fa fa-address-card"></i> Cambiar contraseña</a></li>
+                                    class="fa fa-address-card"></i> Cambiar contraseña</a>
+                        </li>
                         @livewire('iniciar-sesion.logout')
                     </ul>
                 </li>

@@ -1,5 +1,8 @@
 <div>
 
+    <head>
+        <link rel="stylesheet" href="{{asset('static/css/inputs.css')}}">
+    </head>
     <div class="container mt-3">
         <form wire:submit.prevent="crear">
             <div class="card mx-auto w-50 ">
@@ -17,10 +20,10 @@
         </form>
     </div>
 
-    <div class="container mt-3">
+    <div class="container mt-3 table-responsive">
         @if (count((array) $requests))
             <h2>Mis solicitudes realizadas</h2>
-            <table class="table table-striped text-center table-request">
+            <table class="table table-striped text-center">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Fecha Solicitada</th>

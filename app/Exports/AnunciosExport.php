@@ -6,13 +6,25 @@ use App\Models\Anuncio;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-class AnunciosExport implements FromView
+class AnunciosExport implements FromView, WithColumnWidths
 {
     public function view(): View
     {
-        return view('livewire.admin.anunciosExcel' , [
+        return view('livewire.admin.anunciosExcel', [
             'anuncios' => Anuncio::all()
         ]);
+    }
+
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 3,
+            'B' => 45,
+            'C' => 168,
+            'D' => 20,
+            'E' => 29
+        ];
     }
 }

@@ -6,7 +6,7 @@
 
 
     <div class="row">
-        <div class="col mb-1">
+        <div class="col-4 mb-1">
             <div class="input-group">
                 <span class="input-group-text"><i class="fa fa-search"></i></span>
                 <input wire:model="search" type="text" class="form-control" placeholder="Buscar">
@@ -23,8 +23,8 @@
                     Generar reporte
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" target="a_blank" href="{{ route('admin.anuncio.pdf') }}" type="button"><i
-                            class="fa fa-file-pdf"></i> PDF </a>
+                    <a class="dropdown-item" target="a_blank" href="{{ route('admin.anuncio.pdf', $search) }}"
+                        type="button"><i class="fa fa-file-pdf"></i> PDF </a>
                     <a class="dropdown-item" target="a_blank" href="{{ route('admin.anuncio.excel') }}"
                         type="button"><i class="fa fa-file-excel-o"></i>
                         Excel</a>
@@ -33,13 +33,11 @@
         </div>
     </div>
 
-
-
     <!-- Page Content  -->
     <div class="row">
         <div class="col text-center table-responsive">
             @if (count((array) $anuncios))
-                <table class="table table-striped table-anuncio" Width=50%>
+                <table class="table table-striped table-anuncio">
                     <thead class="table-dark">
                         <tr>
                             <th>Título</th>
@@ -53,7 +51,9 @@
                     <tbody>
                         @foreach ($anuncios as $anuncio)
                             <tr>
-                                <td scope='row'>{{ $anuncio->titulo }}</td>
+                                <td scope='row'>
+                                    <div style="width: 250px; overflow: hidden;">{{ $anuncio->titulo }}</div>
+                                </td>
                                 <td>
                                     <div style="width: 450px; overflow: hidden;">{{ $anuncio->contenido }}</div>
                                 </td>
@@ -70,7 +70,7 @@
                                         data-bs-target="#exampleModalAnuncioDel" data-backdrop="false"
                                         data-bs-whatever="@mdo"><i class="fa fa-trash"></i></button>
                                     <a href="{{ route('admin.anuncio-edit', $anuncio) }}" title="Editar anuncio"
-                                        type="button" class="btn-sm btn-info edit"><i class="fa fa-edit"></i></a>
+                                        type="button" class="btn-sm btn-info"><i class="fa fa-edit"></i></a>
                                     @if ($anuncio->estado == 1)
                                         <button wire:click="disable({{ $anuncio->id }})" type="button"
                                             title="Desactivar Anuncio" class="btn btn-sm btn-warning"><i
@@ -105,29 +105,31 @@
                 <form wire:submit="delete">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">¿Deseas eliminar este anuncio?</h5>
-                        <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal"
+                        <button type="button" class="btn-sm btn-close" style="border: 1px solid black;" data-bs-dismiss="modal"
                             aria-label="Close">&times;</button>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="mb-3">
-                                <h5><b>Titulo del anuncio</b></h5>
+                                <h5><b>Titulo del anuncio:</b></h5>
                                 <p style="color: black">{{ $anuncio->titulo }}</p>
 
-                                <h5><b>Contenido del anuncio</b></h5>
+                                <h5><b>Contenido del anuncio:</b></h5>
                                 <p style="color: black">{{ $anuncio->contenido }}</p>
 
-                                <h5><b>Imagen</b></h5>
-                                @if ($anuncio->url_img)
-                                    <img class="img-fluid rounded"
-                                        src="{{ Storage::disk('public')->url($anuncio->url_img) }}" width="350"
-                                        height="350"><br>
+                                <h5><b>Imagen:</b></h5>
+                                @if ($url_img != null)
+                                    <img class="img-fluid" width="350" height="350"
+                                        src="{{ Storage::disk('public')->url($anuncio->url_img) }}"
+                                        class="card-img-top" alt="">
+                                @else
+                                    <p>No hay imagen <i class="fa fa-bullhorn" aria-hidden="true"></i></p>
                                 @endif
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button wire:click="delete({{ $anuncio->id }})" type="button"
+                        <button wire:click="delete({{ $anuncio->id }})" style="background-color: #0c8461; border: none;" type="button"
                             class="btn btn-success">Enviar</button>
                     </div>
                 </form>

@@ -7,12 +7,11 @@
     <!-- Page Content  -->
     <div>
         <form wire:submit.prevent="editarAnuncio">
-            <div class="card">
+            <div class="card content">
                 <div class="card-header">
                     <h5>Para editar el anuncio simplemente hay que eliminar el contenido de los campos y escribir el
                         nuevo.</h5>
-                    <p>Para la imagen simplemente se selecciona la imagen a subir y se mostrara una vista previa de
-                        la imagen.</p>
+                    <p>Para cambiar la imagen solo hay que seleccionar una nueva y dar clic en publicar.</p>
                 </div>
                 <div class="card-body">
                     @include('livewire.admin.formulario-anuncio')

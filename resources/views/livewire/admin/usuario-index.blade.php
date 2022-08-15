@@ -6,15 +6,15 @@
 
 
     <div class="row">
-        <div class="col mb-1">
+        <div class="col-4 mb-1">
             <div class="input-group">
                 <span class="input-group-text"><i class="fa fa-search"></i></span>
-                <input wire:model="search" name="search" id="search" type="text" class="form-control"
+                <input wire:model="search" name="buscar" id="buscar" type="text" class="form-control"
                     placeholder="Buscar">
             </div>
         </div>
 
-        <div class="col-6 mt-2">
+        <div class="col-8 mt-2">
             <div class="dropdown">
                 <button type="button" class="float-right mr-1 btn btn-sm btn-success dropdown-toggle user"
                     data-toggle="dropdown"><i class="fa fa-user-plus"></i>
@@ -30,13 +30,13 @@
             </div>
 
             <div class="dropdown">
-                <button type="button" class="float-right mr-1 btn btn-sm btn-dark dropdown-toggle report"
+                <button type="button" class="float-right btn btn-sm btn-dark dropdown-toggle report"
                     data-toggle="dropdown"><i class="fa fa-file"></i>
                     Generar reporte
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" target="a_blank" href="{{ route('admin.users.pdf') }}" type="button"><i
-                            class="fa fa-file-pdf"></i> PDF </a>
+                    <a class="dropdown-item" target="a_blank" href="{{ route('admin.users.pdf', $search) }}"
+                        name="exportPDF" type="submit"><i class="fa fa-file-pdf"></i> PDF </a>
                     <a class="dropdown-item" target="a_blank" href="{{ route('admin.users.excel') }}" type="button"><i
                             class="fa fa-file-excel-o"></i>
                         Excel</a>
@@ -50,8 +50,8 @@
         <div class="col text-center table-responsive">
             @if (count((array) $usuarios))
                 <table class="table table-striped">
-                    <thead class="table-dark ">
-                        <tr>
+                    <thead class="table-dark">
+                        <tr class="text-center">
                             <th>Nombre</th>
                             <th>Tipo de agremiado</th>
                             <th>Puesto Docente</th>
@@ -59,6 +59,7 @@
                             <th>Departamento</th>
                             <th>Puesto Administrativo</th>
                             <th>Estado</th>
+                            {{-- <th>Tipo de usuario</th> --}}
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -66,8 +67,12 @@
                         @foreach ($usuarios as $usuario)
                             <tr>
                                 @if ($usuario->is_admin == 1)
-                                    <td scope="row"><b>{{ $usuario->nombre }}
-                                            {{ $usuario->apellido }} </b> </td>
+                                    <td scope="row">
+                                        <p><span style="color:#177c67">SUTUT</span><span style="color:grey">
+                                                Admin</span>
+                                            <b> {{ $usuario->nombre }} {{ $usuario->apellido }} </b>
+                                        </p>
+                                    </td>
                                 @else
                                     <td scope="row">{{ $usuario->nombre }}
                                         {{ $usuario->apellido }} </td>
@@ -84,24 +89,31 @@
                                     <td><span class="badge badge-pill badge-danger">Inactivo</span></td>
                                 @endif
 
+                                {{-- @if ($usuario->is_admin == 1)
+                                    <td>SUTUT Admin</td>
+                                @elseif ($usuario->is_admin == 0)
+                                    <td>Agremiado</td>
+                                @endif --}}
+
                                 <td>
                                     <a type="button" href="{{ route('admin.show-user', $usuario) }}"
-                                        title="Información del usuario(Vista previa)" class="btn btn-info btn-sm"><i
-                                            class="fa fa-eye"></i></a>
+                                        title="Información del usuario(Vista previa)"
+                                        class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
                                     <a type="button" href="{{ route('admin.user-edit', $usuario) }}"
-                                        title="Editar información del usuario" class="btn btn-primary btn-sm edit"><i
-                                            class="fa fa-edit"></i></a>
+                                        title="Editar información del usuario" class="btn btn-primary btn-sm "><i
+                                            class="fa fa-edit fa-sm"></i></a>
                                     @if ($usuario->estado == 1)
                                         <button wire:click="disable({{ $usuario->id }})" type="button"
                                             title="Desactivar usuario" class="btn btn-warning btn-sm"><i
-                                                class="fa fa-user-slash"></i></button>
+                                                class="fa fa-user-slash fa-sm"></i></button>
                                     @elseif ($usuario->estado == 0)
                                         <button wire:click="enable({{ $usuario->id }})" type="button"
                                             title="Activar usuario" class="btn btn-success btn-sm"><i
-                                                class="fa fa-user-slash"></i></button>
+                                                class="fa fa-user-slash fa-sm"></i></button>
                                     @endif
 
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>
@@ -109,9 +121,14 @@
 
                 {{ $cargado == true ? $usuarios->links() : null }}
             @else
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col mb-1">
+                            <div class="jumbotron">
+                                <h2>No hay resultados por mostrar</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endif
             </table>

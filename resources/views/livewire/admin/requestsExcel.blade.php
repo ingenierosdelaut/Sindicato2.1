@@ -1,3 +1,8 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="{{ asset('static/css/app.css') }}">
+</head>
+
 <div class="container">
     {{-- <img src="{{ asset('static/images/sututslrc.png') }}" width="150" height="150" alt=""> --}}
     <h1><span style="color:#177c67">SUTUT</span><span style="color:grey">SLRC</span></h1>
@@ -8,11 +13,11 @@
 <table class="table text-center table-striped">
     <thead class="table-dark">
         <tr>
-            <td scope="col">Id</td>
-            <td scope="col">Nombre</td>
-            <td scope="col">Estado</td>
-            <td scope="col">Fecha en que se Solicito</td>
-            <td scope="col">Motivo</td>
+            <td scope="col"><b>ID</b></td>
+            <td scope="col"><b>Nombre</b></td>
+            <td scope="col"><b>Estado</b></td>
+            <td scope="col"><b>Fecha en que se Solicito</b></td>
+            <td scope="col"><b>Motivo</b></td>
         </tr>
     </thead>
     @foreach ($requests as $request)
@@ -21,7 +26,7 @@
                 <!--ID-->
                 <td scope="row">{{ $request->id }}</td>
                 <!--Nombre-->
-                <td>{{ $request->id_usuario }}</td>
+                <td>{{ $request->nombre }} {{ $request->apellido }}</td>
                 <!--Estado-->
                 @if ($request->estado == 0)
                     <td><span class="badge badge-pill badge-warning">Pendiente</span></td>

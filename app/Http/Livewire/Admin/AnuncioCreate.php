@@ -38,7 +38,7 @@ class AnuncioCreate extends Component
         $this->validate();
         $this->anuncio->id_usuario = auth()->user()->id;
         if ($this->url_img != null) {
-            $this->anuncio->url_img = Storage::disk('public')->put('images/anuncios', $this->url_img);
+            $this->anuncio->url_img = Storage::disk('public')->put('/images/anuncios', $this->url_img);
         }
         $this->anuncio->estado = 1;
         $this->anuncio->save();

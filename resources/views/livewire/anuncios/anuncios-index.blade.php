@@ -11,11 +11,10 @@
             <div class="g-start-2" >
                 <div class="container contenedor">
                     @if (count((array) $anuncios))
-
                         <div class="jumbotron">
                             @foreach ($anuncios as $anuncio)
                                 <!--Anuncio-->
-                                <div class="card mt-2">
+                                <div class="card mt-3">
                                     <div class="card-header">
                                         <b>{{ $anuncio->titulo }}</b>
                                     </div>
@@ -52,6 +51,6 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>

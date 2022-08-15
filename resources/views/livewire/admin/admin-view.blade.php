@@ -12,13 +12,12 @@
                     @if (count((array) $anuncios) > 0)
                         <div class="jumbotron">
                             @if ($requests > 0)
-                                <div class="alert alert-info">
-                                    <strong>¡¡Notificación!!</strong> Tienes {{ $requests }} Solicitud(es)
+                                <div class="alert">
+                                    <strong class="notification">¡¡Notificación!!</strong> Tienes <b>{{ $requests }}
+                                        Solicitud(es)</b>
                                     por atender en estado pendiente
-                                    <div>
-                                        <a href="{{ route('admin.solicitudes') }}"
-                                            class="btn btn-sm btn-info">¿Atender?</a>
-                                    </div>
+                                    <a href="{{ route('admin.solicitudes') }}"
+                                        class="btn btn-sm btn-info button">¿Atender?</a>
                                 </div>
                             @endif
 
@@ -32,7 +31,7 @@
                             @foreach ($anuncios as $anuncio)
                                 <!--Anuncio-->
                                 @if ($anuncio->estado == 1)
-                                    <div class="card">
+                                    <div class="card text-dark">
                                         <div class="card-header">
                                             <b>{{ $anuncio->titulo }}</b>
                                         </div>
@@ -54,7 +53,7 @@
                                                         class="text-muted">Editar</a></small>
                                                 <button wire:click="disable({{ $anuncio->id }})" type="button"
                                                     title="Desactivar Anuncio" style="border: none;"><small
-                                                    class="text-muted">Desactivar</a></small>
+                                                        class="text-muted">Desactivar</a></small>
                                                 </button>
                                                 <small class="float-right text-muted muted"><b>Creado el dia
                                                         {{ $anuncio->created_at }} por

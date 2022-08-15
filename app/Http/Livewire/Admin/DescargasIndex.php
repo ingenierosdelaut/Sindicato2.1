@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Admin;
 
 use App\Exports\DescargasExport;
 use App\Models\Descarga;
+use App\Models\Usuario;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +20,7 @@ class DescargasIndex extends Component
 
     use WithPagination;
     public $search = '';
+    protected $paginationTheme = 'bootstrap';
     public $cargado = false;
     public function render()
     {
@@ -35,16 +38,42 @@ class DescargasIndex extends Component
         return view('livewire.admin.descargas-index', compact('descargas'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
-    public function generarPDF()
+    public function generatePDF($search = null)
     {
-        $descargas = Descarga::join('usuarios', 'usuario_id', '=', 'usuarios.id')->select(
-            'descargas.*',
-            'usuarios.nombre',
-            'usuarios.apellido'
-        )->paginate();
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('livewire.admin.pdfDescargas', ['descargas' => $descargas]);
-        return $pdf->stream();
+        $iduser = auth()->user()->id;
+        $data = Usuario::find($iduser);
+        $now = Carbon::now();
+        $date = $now->format('d-m-Y');
+
+        if ($search != '') {
+
+            $descargas = Descarga::join('usuarios', 'usuario_id', '=', 'usuarios.id')
+                ->join('documentos', 'doc_id', '=', 'documentos.id')
+                ->where('titulo', 'LIKE', '%' . $search . '%')
+                ->orwhere('nombre', 'LIKE', '%' . $search . '%')
+                ->orwhere('apellido', 'LIKE', '%' . $search . '%')
+                ->select(
+                    'descargas.*',
+                    'documentos.titulo',
+                    'usuarios.nombre',
+                    'usuarios.apellido'
+                )->get();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfDescargas', ['descargas' => $descargas, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
+        } else {
+            $descargas = Descarga::join('usuarios', 'usuario_id', '=', 'usuarios.id')
+                ->join('documentos', 'doc_id', '=', 'documentos.id')
+                ->select(
+                    'descargas.*',
+                    'documentos.titulo',
+                    'usuarios.nombre',
+                    'usuarios.apellido'
+                )->get();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfDescargas', ['descargas' => $descargas, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
+        }
     }
 
     public function exportExcel()

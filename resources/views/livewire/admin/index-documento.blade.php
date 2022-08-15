@@ -1,43 +1,40 @@
-<div wire:init="cargando">
+<div>
 
     <head>
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
     </head>
 
     <!-- Header  -->
-    <div>
-        <div class="row">
-            <div class="col-4 mb-2">
-                <div class="input-group ">
-                    <span class="input-group-text"><i class="fa fa-search"></i></span>
-                    <input wire:model="search" type="text" class="form-control" placeholder="Buscar">
-                </div>
-            </div>
-
-            <div class="col mt-2">
-
-                <button type="button" class="float-right btn btn-sm btn-success user" data-bs-toggle="modal"
-                    data-dismiss="modal" data-bs-target="#Modaldoc" style="background-color: #177c67; border: none;"
-                    data-backdrop="false" data-bs-whatever="@mdo"><i class="fa fa-plus-square"></i> Subir Nuevo
-                    Documento</button>
-
-
-                <div class="dropdown">
-                    <button type="button" class="float-right mr-1 btn btn-sm btn-dark dropdown-toggle report"
-                        data-toggle="dropdown"><i class="fa fa-file"></i>
-                        Generar reporte
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.descargas.pdf') }}"
-                            type="button"><i class="fa fa-file-pdf"></i> PDF </a>
-                        <a class="dropdown-item" target="a_blank" href="{{ route('admin.documentos.excel') }}"
-                            type="button"><i class="fa fa-file-excel-o"></i>
-                            Excel</a>
-                    </div>
-                </div>
-
+    <div class="row">
+        <div class="col-4 mb-1">
+            <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                <input wire:model="search" name="buscar" id="buscar" type="text" class="form-control"
+                    placeholder="Buscar">
             </div>
         </div>
+
+        <div class="col mt-2">
+            <button type="button" class="float-right btn btn-sm btn-success user" data-bs-toggle="modal"
+                data-dismiss="modal" data-bs-target="#Modaldoc" data-backdrop="false" data-bs-whatever="@mdo"><i
+                    class="fa fa-plus-square"></i> Subir Nuevo
+                Documento</button>
+
+            <div class="dropdown">
+                <button type="button" class="float-right mr-1 btn btn-sm btn-dark dropdown-toggle report"
+                    data-toggle="dropdown"><i class="fa fa-file"></i>
+                    Generar reporte
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" target="a_blank" href="{{ route('admin.documentos.pdf', $search) }}"
+                        type="button"><i class="fa fa-file-pdf"></i> PDF </a>
+                    <a class="dropdown-item" target="a_blank" href="{{ route('admin.documentos.excel') }}"
+                        type="button"><i class="fa fa-file-excel-o"></i>
+                        Excel</a>
+                </div>
+            </div>
+        </div>
+
         <div wire:ignore.self class="modal" data-backdrop="static" id="Modaldoc" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -60,13 +57,12 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     {{-- Page content --}}
     <div class="row">
-        <div class="col text-center">
-            @if (count((array) $documentos))
+        <div class="col text-center table-responsive">
+            @if (count($documentos) > 0)
                 <table class="table table-striped">
                     <thead class="table-dark">
                         <tr>
@@ -76,7 +72,6 @@
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach ($documentos as $documento)
                             <tr>
@@ -95,7 +90,7 @@
                                             data-bs-whatever="@mdo"><i class="fa fa-ban"></i></button>
                                     </td>
                                 @elseif ($documento->estado == 0)
-                                    <td>Sin acciones por realizar</td>
+                                    <td></td>
                                 @endif
                             </tr>
 
@@ -127,18 +122,18 @@
                                             <div class="modal-footer">
                                                 @if ($documento->estado == 1)
                                                     <button wire:click="desactivar({{ $documento->id }})"
-                                                        type="button" style="background-color: #177c67; border: none;" class="btn btn-success">Desactivar</button>
+                                                        type="button" style="background-color: #177c67; border: none;"
+                                                        class="btn btn-success">Desactivar</button>
                                                 @endif
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-
                             </div>
                         @endforeach
                     </tbody>
-
                 </table>
+                {{ $documentos->links() }}
             @else
                 <div class="container text-center">
                     <div class="row">
@@ -151,12 +146,6 @@
                 </div>
             @endif
         </div>
-
     </div>
-
-    {{ $cargado == true ? $documentos->links() : null }}
-
-    <!--Modal-->
-
 
 </div>

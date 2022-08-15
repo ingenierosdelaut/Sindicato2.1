@@ -1,3 +1,8 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="{{ asset('static/css/app.css') }}">
+</head>
+
 <div class="container">
     {{-- <img src="{{ asset('static/images/sututslrc.png') }}" width="150" height="150" alt=""> --}}
     <h1><span style="color:#177c67">SUTUT</span><span style="color:grey">SLRC</span></h1>

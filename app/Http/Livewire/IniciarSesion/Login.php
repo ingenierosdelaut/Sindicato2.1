@@ -20,11 +20,6 @@ class Login extends Component
     {
         $datos = $this->validate();
 
-        // if (auth()->user($datos)->estado == 0) {
-        //     $this->emit('alert-login-0', 'Este usuario esta temporalmente inavilitado. Comunicate con el administrador de la pagina para que te otorge el permiso de acceso');
-        //     return redirect(route('index'));
-        // }
-
         if (Auth::attempt($datos)) {
             if (auth()->user($datos)->estado == 0) {
                 return $this->emit('alert-user-disabled', 'Usuario desactivado, comuníquese con el administrador del sitio web.');

@@ -18,7 +18,7 @@
                     Generar reporte
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" target='a_blank' href="{{ route('admin.descargas.pdf') }}"
+                    <a class="dropdown-item" target='a_blank' href="{{ route('admin.descargas.pdf', $search) }}"
                         type="button"><i class="fa fa-file-pdf"></i> PDF </a>
                     <a class="dropdown-item" target='a_blank' href="{{ route('admin.descargas.excel') }}"
                         type="button"><i class="fa fa-file-excel-o"></i>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="row">
-        <div class="col text-center">
+        <div class="col text-center table-responsive">
             @if (count((array) $descargas))
                 <table class="table table-striped">
                     <thead class="table-dark ">

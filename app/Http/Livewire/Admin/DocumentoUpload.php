@@ -30,11 +30,12 @@ class DocumentoUpload extends Component
             $fileModel->url_doc = $filePath;
             $fileModel->estado = 1;
             $fileModel->save();
+
             return back()
                 ->with('success', 'El documento ha sido guardado.')
                 ->with('file', $fileName);
         }
+
         return view('livewire.admin.documentos-upload');
-        $this->emit('alert-docs-create', 'El documento se a guardado exitosamente');
     }
 }

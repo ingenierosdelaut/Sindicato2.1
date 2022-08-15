@@ -30,7 +30,7 @@ class AnuncioEdit extends Component
             if ($this->anuncio->url_img != null) {
                 Storage::disk('public')->delete($this->anuncio->url_img);
             }
-            $this->anuncio->url_img = Storage::disk('public')->put('images/anuncios', $this->url_img);
+            $this->anuncio->url_img = Storage::disk('public')->put('/images/anuncios', $this->url_img);
         }
         $this->anuncio->save();
         $this->emit('alert-anuncio-edit', 'Has modificado correctamente el anuncio');

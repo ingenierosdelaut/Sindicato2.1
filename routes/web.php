@@ -6,8 +6,6 @@ use App\Http\Livewire\Admin\AnuncioCreate;
 use App\Http\Livewire\Admin\AnuncioDelete;
 use App\Http\Livewire\Admin\AnuncioEdit;
 use App\Http\Livewire\Admin\AnuncioIndex;
-use App\Http\Livewire\Admin\AppUser;
-use App\Http\Livewire\Admin\Denegado;
 use App\Http\Livewire\Admin\DescargasIndex;
 use App\Http\Livewire\Admin\DocumentoUpload;
 use App\Http\Livewire\Admin\IndexDocumento;
@@ -26,9 +24,7 @@ use App\Http\Livewire\Documentos\DocumentosIndex;
 use App\Http\Livewire\Index;
 use App\Http\Livewire\IniciarSesion\Login;
 use App\Http\Livewire\Requests\RequestCreate;
-use App\Http\Livewire\Requests\RequestDelete;
-use App\Http\Livewire\Requests\RequestEdit;
-use Facade\IgnitionContracts\Solution;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,10 +58,12 @@ Route::group(['middleware' => 'auth'], function () {
     //Admin
     Route::get('/admin/home', AdminView::class)->name('admin.view')->middleware('auth.admin');
     Route::get('/admin/usuarios', UsuarioIndex::class)->name('admin.usuarios')->middleware('auth.admin');
+    Route::post('/admin/usuarios', UsuarioIndex::class)->name('admin.usuarios')->middleware('auth.admin');
     Route::get('/admin/usuarios/crear-usuario', UsuarioCreate::class)->name('admin.create-user')->middleware('auth.admin');
     Route::get('/admin/usuarios/{usuario}/editar-usuario', UsuariosEdit::class)->name('admin.user-edit')->middleware('auth.admin');
     Route::get('/admin/usuarios/{usuario}/usuario', UsuarioShow::class)->name('admin.show-user')->middleware('auth.admin');
-    Route::get('/admin/usuarios/generar-pdf', [UsuarioIndex::class, 'generarPDF'])->name('admin.users.pdf')->middleware('auth.admin');
+    Route::get('/admin/usuarios/generar-pdf/', [UsuarioIndex::class, 'generatePDF'])->name('admin.users.pdf')->middleware('auth.admin');
+    Route::get('/admin/usuarios/generar-pdf/{search}', [UsuarioIndex::class, 'generatePDF'])->name('admin.users.pdf')->middleware('auth.admin');
     Route::get('/admin/usuarios/export-excel', [UsuarioIndex::class, 'exportExcel'])->name('admin.users.excel')->middleware('auth.admin');
     Route::get('/admin/usuario/crear-admin', CreateAdmin::class)->name('admin.create')->middleware('auth.admin');
 
@@ -77,7 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/anuncios/crear-anuncio', AnuncioCreate::class)->name('admin.anuncio-create')->middleware('auth.admin');
     Route::get('/admin/anuncios/{anuncio}/editar-anuncio', AnuncioEdit::class)->name('admin.anuncio-edit')->middleware('auth.admin');
     Route::get('/admin/anuncio/{anuncio}/eliminar', AnuncioDelete::class)->name('admin.anuncio-delete')->middleware('auth.admin');
-    Route::get('/admin/anuncios/generar-pdf', [AnuncioIndex::class, 'generarPDF'])->name('admin.anuncio.pdf')->middleware('auth.admin');
+    Route::get('/admin/anuncios/generar-pdf', [AnuncioIndex::class, 'generatePDF'])->name('admin.anuncio.pdf')->middleware('auth.admin');
+    Route::get('/admin/anuncios/generar-pdf/{search}', [AnuncioIndex::class, 'generatePDF'])->name('admin.anuncio.pdf')->middleware('auth.admin');
     Route::get('/admin/anuncios/export-excel', [AnuncioIndex::class, 'exportExcel'])->name('admin.anuncio.excel')->middleware('auth.admin');
 
     //Admin documentos
@@ -85,15 +84,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin/documentos-upload', [DocumentoUpload::class, 'fileUpload'])->name('fileUpload')->middleware('auth.admin');
     Route::get('/admin/documentos/index', IndexDocumento::class)->name('admin.documentos-index')->middleware('auth.admin');
     Route::get('/admin/documentos/export-excel', [IndexDocumento::class, 'exportExcel'])->name('admin.documentos.excel')->middleware('auth.admin');
+    Route::get('/admin/documentos/generar-pdf', [IndexDocumento::class, 'generatePDF'])->name('admin.documentos.pdf');
+    Route::get('/admin/documentos/generar-pdf/{search}', [IndexDocumento::class, 'generatePDF'])->name('admin.documentos.pdf');
 
     //Admin descargas
     Route::get('/admin/descargas', DescargasIndex::class)->name('admin.descargas')->middleware('auth.admin');
-    Route::get('/admin/descargas/generar-pdf', [DescargasIndex::class, 'generarPDF'])->name('admin.descargas.pdf')->middleware('auth.admin');
+    Route::get('/admin/descargas/generar-pdf', [DescargasIndex::class, 'generatePDF'])->name('admin.descargas.pdf')->middleware('auth.admin');
+    Route::get('/admin/descargas/generar-pdf/{search}', [DescargasIndex::class, 'generatePDF'])->name('admin.descargas.pdf')->middleware('auth.admin');
     Route::get('/admin/descargas/export-excel', [DescargasIndex::class, 'exportExcel'])->name('admin.descargas.excel')->middleware('auth.admin');
 
     //Admin Solicitudes
     Route::get('/admin/solicitudes', Solicitud::class)->name('admin.solicitudes')->middleware('auth.admin');
-    Route::get('/admin/solicitudes/generar-pdf', [Solicitud::class, 'generarPDF'])->name('admin.solicitudes.pdf')->middleware('auth.admin');
+    Route::get('/admin/solicitudes/generar-pdf', [Solicitud::class, 'generatePDF'])->name('admin.solicitudes.pdf')->middleware('auth.admin');
+    Route::get('/admin/solicitudes/generar-pdf/{search}', [Solicitud::class, 'generatePDF'])->name('admin.solicitudes.pdf')->middleware('auth.admin');
     Route::get('/admin/solicitudes/export-excel', [Solicitud::class, 'exportExcel'])->name('admin.solicitudes.excel')->middleware('auth.admin');
 
     //requests usuarios
@@ -104,5 +107,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Documentos Usuarios
     Route::get('/usuario/documentos', DocumentosIndex::class)->name('documentos.index');
+
     Route::get('/usuario/editar-password', UsuariosEditPassword::class)->name('usuario.edit-pwd');
 });

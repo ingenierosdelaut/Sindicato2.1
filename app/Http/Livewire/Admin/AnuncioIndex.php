@@ -6,6 +6,8 @@ use App\Exports\AnunciosExport;
 use App\Models\Admin;
 use App\Models\Anuncio;
 use App\Models\Request;
+use App\Models\Usuario;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -25,41 +27,58 @@ class AnuncioIndex extends Component
     use WithFileUploads;
     public $search = '';
     public $url_img;
+    public $estado;
     public $cargado = false;
     public Anuncio $anuncio;
-    public $estado;
     protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
-        // $anuncios = ($this->cargado == true) ? Anuncio::where('titulo', 'LIKE', '%' . $this->search . '%')
-        //     // ->orWhere('titulo', 'LIKE', '%' . $this->search . '%')
-        //     ->paginate(10) : [];
-        // $anuncios = Request::where('id_usuario', auth()->user()->id)->paginate(5);
         $anuncios = ($this->cargado == true) ? Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
             ->where('titulo', 'LIKE', '%' . $this->search . '%')
             ->orwhere('contenido', 'LIKE', '%' . $this->search . '%')
             ->orwhere('nombre', 'LIKE', '%' . $this->search . '%')
-            // ->orwhere('estado', 'LIKE', '%' . $this->search . '%')
+            //->orwhere('estado', 'LIKE', '%' . $this->search . '%')
             ->select(
                 'anuncios.*',
                 'usuarios.nombre',
-                'usuarios.apellido'
-            )->latest()
-            ->orderby('created_at', 'desc')->paginate(5) : [];
+                'usuarios.apellido',
+                // 'usuarios.estado'
+            )->orderby('created_at', 'desc')->paginate(4) : [];
         return view('livewire.admin.anuncio-index', compact('anuncios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
-    public function generarPDF()
+    public function generatePDF($search = null)
     {
-        $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')->select(
-            'anuncios.*',
-            'usuarios.nombre',
-            'usuarios.apellido'
-        )->paginate();
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('livewire.admin.pdfAnuncios', ['anuncios' => $anuncios]);
-        return $pdf->stream();
+        $iduser = auth()->user()->id;
+        $data = Usuario::find($iduser);
+        $now = Carbon::now();
+        $date = $now->format('d-m-Y');
+
+        if ($search != '') {
+            $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
+                ->where('titulo', 'LIKE', '%' . $search . '%')
+                ->orwhere('contenido', 'LIKE', '%' . $search . '%')
+                ->orwhere('nombre', 'LIKE', '%' . $search . '%')
+                ->select(
+                    'anuncios.*',
+                    'usuarios.nombre',
+                    'usuarios.apellido'
+                )->get();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfAnuncios', ['anuncios' => $anuncios, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
+        } else {
+            $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
+                ->select(
+                    'anuncios.*',
+                    'usuarios.nombre',
+                    'usuarios.apellido'
+                )->get();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfAnuncios', ['anuncios' => $anuncios, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
+        }
     }
 
     public function exportExcel()

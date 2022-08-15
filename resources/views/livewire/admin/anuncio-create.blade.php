@@ -7,7 +7,7 @@
     <!-- Page Content  -->
     <div>
         <form wire:submit.prevent="crearAnuncio">
-            <div class="card">
+            <div class="card content">
                 <div class="card-header">
                     <h4>Para crear un nuevo anuncio solo hay que llenar los siguientes campos.</h4>
                     <p style="color: black">Si no se desea incluir una imagen en el anuncio, simplemente se llenarán los campos de título y especificaciones y se dara clic en publicar.</p>

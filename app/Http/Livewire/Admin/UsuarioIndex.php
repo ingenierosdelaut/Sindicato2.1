@@ -6,7 +6,11 @@ use App\Exports\FilterUserExport;
 use App\Exports\UsuariosExport;
 use App\Exports\UsuariosExports;
 use App\Models\Usuario;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
@@ -28,43 +32,49 @@ class UsuarioIndex extends Component
     {
         $usuarios = ($this->cargado == true) ? Usuario::where('nombre', 'LIKE', '%' . $this->search . '%')
             ->orwhere('tipo_agremiado', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('nombre', 'LIKE', '%' . $this->search . '%')
             ->orwhere('apellido', 'LIKE', '%' . $this->search . '%')
             ->orwhere('estado', 'LIKE', '%' . $this->search . '%')
             ->orwhere('puestoA', 'LIKE', '%' . $this->search . '%')
             ->orwhere('puestoD', 'LIKE', '%' . $this->search . '%')
             ->orwhere('carrera', 'LIKE', '%' . $this->search . '%')
+            ->orwhere('is_admin', 'LIKE', '%' . $this->search . '%')
             ->orwhere('departamento', 'LIKE', '%' . $this->search . '%')
-            ->paginate(10) : [];
+            ->orderBy('is_admin', 'desc')
+            ->paginate(5) : [];
         return view('livewire.admin.usuario-index', compact('usuarios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
-    public function generarPDF()
+    public function generatePDF($search = null)
     {
         $iduser = auth()->user()->id;
         $data = Usuario::find($iduser);
-        $usuarios = Usuario::all();
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('livewire.admin.pdfUsers', ['usuarios' => $usuarios, 'data' => $data], ['date' => date('Y-m-d')]);
-        return $pdf->setPaper('a4', 'landscape')->stream();
+        $now = Carbon::now();
+        $date = $now->format('d-m-Y');
+
+        if ($search != '') {
+
+            $usuarios = Usuario::where('nombre', 'LIKE', '%' . $search . '%')
+                ->orwhere('tipo_agremiado', 'LIKE', '%' . $search . '%')
+                ->orwhere('apellido', 'LIKE', '%' . $search . '%')
+                ->orwhere('estado', 'LIKE', '%' . $search . '%')
+                ->orwhere('puestoA', 'LIKE', '%' . $search . '%')
+                ->orwhere('puestoD', 'LIKE', '%' . $search . '%')
+                ->orwhere('carrera', 'LIKE', '%' . $search . '%')
+                ->orwhere('is_admin', 'LIKE', '%' . $search . '%')
+                ->orwhere('departamento', 'LIKE', '%' . $search . '%')->get();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfUsers', ['usuarios' => $usuarios, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
+        } else {
+            $usuarios = Usuario::all();
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('livewire.admin.pdfUsers', ['usuarios' => $usuarios, 'data' => $data, 'date' => $date]);
+            return $pdf->setPaper('a4', 'landscape')->stream();
+        }
     }
 
     public function exportExcel()
     {
-        // $users = app(Usuario::class)->newQuery();
-
-        // if (request()->has('search') && !empty(request()->get('search'))) {
-        //     $search = request()->query('search');
-        //     $users->where(function ($query) use ($search) {
-        //         $query->where('nombre', 'LIKE', "%{$search}%")
-        //             ->orWhere('apellido', 'LIKE', "%{$search}%")
-        //             ->orWhere('estado', 'LIKE', "%{$search}%")
-        //             ->orWhere('tipo_agremiado', 'LIKE', "%{$search}%")
-        //             ->orWhere('puestoA', 'LIKE', "%{$search}%")
-        //             ->orWhere('puestoD', 'LIKE', "%{$search}%")
-        //             ->orWhere('carrera', 'LIKE', "%{$search}%");
-        //     });
-        // }
         return Excel::download(new UsuariosExports, 'usuarios.xlsx');
     }
 
