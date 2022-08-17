@@ -20,6 +20,8 @@
             left: auto;
             right: -1em;
             text-align: right;
+            background-color: #32373d;
+            color: white;
         }
     </style>
 
@@ -53,7 +55,9 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i
                                 class="fa fa-cog" aria-hidden="true"></i> Opciones</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('usuario.edit-pwd') }}">Cambiar contraseña</a>
+                            <li>
+                                <a class="dropdown-item text-white" href="{{ route('usuario.edit-pwd') }}">Cambiar
+                                    contraseña</a>
                             </li>
                             @livewire('iniciar-sesion.logout')
                         </ul>
