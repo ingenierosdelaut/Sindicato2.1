@@ -1,4 +1,4 @@
-<div>
+<div wire:init="cargando">
 
     <head>
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
@@ -31,29 +31,6 @@
                     <a class="dropdown-item" target="a_blank" href="{{ route('admin.documentos.excel') }}"
                         type="button"><i class="fa fa-file-excel-o"></i>
                         Excel</a>
-                </div>
-            </div>
-        </div>
-
-        <div wire:ignore.self class="modal" data-backdrop="static" id="Modaldoc" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content text-center">
-                    <form action="{{ route('fileUpload') }}" method="post" enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Subir Documento</h5>
-                            <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal"
-                                aria-label="Close">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div>
-                                    @include('livewire.admin.documento-upload')
-                                </div>
-                            </form>
-                        </div>
-
-                    </form>
                 </div>
             </div>
         </div>
@@ -97,13 +74,13 @@
                             <div wire:ignore.self class="modal" data-backdrop="static"
                                 id="exampleModal{{ $documento->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog UpdatePanel">
                                     <div class="modal-content">
-                                        <form>
+                                        <form wire:submit="desactivar">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">¿Deseas eliminar
+                                                <label class="modal-title" id="exampleModalLabel">¿Deseas eliminar
                                                     este
-                                                    documento?</h5>
+                                                    documento?</label>
                                                 <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close">&times;</button>
                                             </div>
@@ -120,11 +97,9 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                @if ($documento->estado == 1)
-                                                    <button wire:click="desactivar({{ $documento->id }})"
-                                                        type="button" style="background-color: #177c67; border: none;"
-                                                        class="btn btn-success">Desactivar</button>
-                                                @endif
+                                                <button wire:click="desactivar({{ $documento->id }})" type="button"
+                                                    style="background-color: #177c67; border: none;"
+                                                    class="btn btn-success">Desactivar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -133,18 +108,36 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $documentos->links() }}
+                {{ $cargado == true ? $documentos->links() : null }}
             @else
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col mb-1">
-                            <div class="jumbotron">
-                                <h2>No hay resultados por mostrar</h2>
-                            </div>
-                        </div>
-                    </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                 </div>
             @endif
+        </div>
+    </div>
+
+    <div wire:ignore.self class="modal" data-backdrop="static" id="Modaldoc" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-center">
+                <form action="{{ route('fileUpload') }}" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Subir Documento</h5>
+                        <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal"
+                            aria-label="Close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div>
+                                @include('livewire.admin.documento-upload')
+                            </div>
+                        </form>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 

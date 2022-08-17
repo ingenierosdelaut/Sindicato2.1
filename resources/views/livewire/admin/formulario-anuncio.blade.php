@@ -7,12 +7,12 @@
                 @error('anuncio.titulo')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-                <textarea class="mt-1 form-control" id="contar" maxlength="200" wire:model="anuncio.contenido" type="text"
-                    placeholder="Especificaciones del anuncio"></textarea>
+                <textarea class="mt-1 form-control" onkeyup="countChars(this);" id="contar" maxlength="200"
+                    wire:model="anuncio.contenido" type="text" placeholder="Especificaciones del anuncio"></textarea>
                 @error('anuncio.contenido')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-                <div class="contador" id="caracters"></div>
+                <p class="contador" id="caracters">0/200 caracteres</p>
             </div>
 
             <div class="row">

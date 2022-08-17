@@ -32,7 +32,7 @@
                                 <b class="text-danger">{{ $message }}</b>
                             @enderror
                         </div>
-                        
+
                         <div class="form-group" id="password-group">
                             <input wire:model="password" type="password" class="form-control"
                                 placeholder="Ingresa tu contraseña" />
@@ -41,7 +41,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-success" style="background-color: #0c8461">Iniciar
+                        <button type="submit" class="btn btn-success" style="background-color: #0c8461; border: none;">Iniciar
                             Sesión</button>
                         <a href="{{ route('index') }}" class="btn btn-secondary"></i>Página Principal</a>
 

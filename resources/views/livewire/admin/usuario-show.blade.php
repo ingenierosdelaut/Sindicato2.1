@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
     </head>
+
     <!-- Page Content  -->
     <div class="">
         <div class="card text-center ">
@@ -179,9 +180,9 @@
             </div>
 
             <div class="card-footer">
-                <a href="{{ route('admin.usuarios') }}" class="btn btn-sm btn-dark float-left"><i
+                <a href="{{ route('admin.usuarios') }}" class="btn btn-dark float-left"><i
                         class="fa fa-arrow-circle-left   "></i> Regresar</a>
-                <a href="{{ route('admin.user-edit', $usuario) }}" class="btn btn-sm btn-info float-right"><i
+                <a href="{{ route('admin.user-edit', $usuario) }}" class="btn btn-info float-right"><i
                         class="fa fa-edit"></i> Editar información</a>
             </div>
         </div>

@@ -87,7 +87,8 @@
 
                     <div class="col-4">
                         <label>Puesto</label>
-                        <input wire:ignore.self type="text" placeholder="Puesto" class="form-control" wire:model="usuario.puestoA">
+                        <input wire:ignore.self type="text" placeholder="Puesto" class="form-control"
+                            wire:model="usuario.puestoA">
                         @error('usuario.puestoA')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -259,8 +260,8 @@
             <h3>Restablecer contraseña por defecto</h3>
             <div class="row mt-2">
                 <div class="col">
-                    <label for="">Para restablecer una contraseña en caso de ser olvidada, solo hay que
-                        seleccionar el recuadro de abajo.</label>
+                    <p style="color: black">Para restablecer una contraseña en caso de ser olvidada, solo hay que
+                        seleccionar el recuadro de abajo.</p>
                     <div class="form-check mb-3">
                         <label class="form-check-label">
                             <input wire:model="password" class="form-check-input" value="sindicatout"

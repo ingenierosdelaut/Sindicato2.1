@@ -27,7 +27,8 @@ class AdminView extends Component
             ->orwhere('contenido', 'LIKE', '%' . $this->search . '%')
             ->select(
                 'anuncios.*',
-                'usuarios.nombre'
+                'usuarios.nombre',
+                'usuarios.apellido'
             )->latest()->paginate(10);
         $requests = Request::where('estado', 0)->count();
         return view('livewire.admin.admin-view', compact('anuncios', 'requests'))->layout('layouts.app-admin')->slot('slotAdmin');
@@ -39,7 +40,6 @@ class AdminView extends Component
         $anuncio['estado'] = 0;
         $anuncio->save();
         $this->emit('alert-anuncio-disabled', 'Has desactivado el anuncio.');
-
     }
 
     public function cargando()

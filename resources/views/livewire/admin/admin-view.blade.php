@@ -55,9 +55,10 @@
                                                     title="Desactivar Anuncio" style="border: none;"><small
                                                         class="text-muted">Desactivar</a></small>
                                                 </button>
-                                                <small class="float-right text-muted muted"><b>Creado el dia
+                                                <small class="float-right text-muted muted"><b>Creado el día
                                                         {{ $anuncio->created_at }} por
-                                                        {{ $anuncio->nombre }}</b></a></small>
+                                                        {{ $anuncio->nombre }}
+                                                        {{ $anuncio->apellido }}</b></a></small>
                                             </footer>
                                         </div>
                                     </div> <br>

@@ -20,22 +20,17 @@ class IndexDocumento extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     use WithFileUploads;
-    // public $cargado = false;
+    public $cargado = false;
     public $url_doc;
     public Documento $documento;
     public $search = '';
 
-    public function mount()
-    {
-        $this->documento = new Documento();
-    }
-
     public function render()
     {
-        $documentos =  Documento::where('titulo', 'LIKE', '%' . $this->search . '%')
+        $documentos =  ($this->cargado == true) ? Documento::where('titulo', 'LIKE', '%' . $this->search . '%')
             ->orwhere('created_at', 'LIKE', '%' . $this->search . '%')
             ->orwhere('estado', 'LIKE', '%' . $this->search . '%')
-            ->orderby('created_at', 'desc')->paginate(5);
+            ->orderby('estado', 'desc')->paginate(5) : [];
         return view('livewire.admin.index-documento', compact('documentos'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
@@ -47,6 +42,7 @@ class IndexDocumento extends Component
 
         Storage::disk('public')->delete($documento['url_doc']);
         $this->emit('alert-documento-desactivar', 'Has desactivado el documento correctamente');
+        return redirect(route('admin.documentos-index'));
     }
 
     public function generatePDF($search = null)
@@ -77,10 +73,10 @@ class IndexDocumento extends Component
     }
 
 
-    // public function cargando()
-    // {
-    //     $this->cargado = true;
-    // }
+    public function cargando()
+    {
+        $this->cargado = true;
+    }
 
     public function updatingSearch()
     {

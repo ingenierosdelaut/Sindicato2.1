@@ -22,7 +22,8 @@ class AnunciosIndex extends Component
         $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
             ->select(
                 'anuncios.*',
-                'usuarios.nombre'
+                'usuarios.nombre',
+                'usuarios.apellido'
             )->latest()->paginate(10);
         $usuarios = Usuario::all();
         return view('livewire.anuncios.anuncios-index', compact('anuncios', 'usuarios'))->layout('layouts.app-user')->slot('slotUser');

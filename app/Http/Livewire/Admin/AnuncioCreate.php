@@ -18,7 +18,6 @@ class AnuncioCreate extends Component
 
     use WithFileUploads;
     public Anuncio $anuncio;
-    public Usuario $usuario;
     public $url_img;
     public $estado;
 
@@ -26,10 +25,6 @@ class AnuncioCreate extends Component
     public function render()
     {
         $anuncios = Anuncio::where('id_usuario', auth()->user()->id)->paginate(5);
-        // $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
-        //     ->select(
-        //         'usuarios.*',
-        //     )->latest()->paginate(5);
         return view('livewire.admin.anuncio-create', compact('anuncios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 

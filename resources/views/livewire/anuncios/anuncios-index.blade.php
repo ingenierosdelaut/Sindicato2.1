@@ -8,7 +8,7 @@
     <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5 pt-5">
         <div class="grid" style="--bs-rows: 3; --bs-columns: 3;">
-            <div class="g-start-2" >
+            <div class="g-start-2">
                 <div class="container contenedor">
                     @if (count((array) $anuncios))
                         <div class="jumbotron">
@@ -34,7 +34,7 @@
                                         <footer>
                                             <small class="float-right text-muted muted"><b>Publicado el dia
                                                     {{ $anuncio->created_at }} por
-                                                    {{ $anuncio->nombre }}</b></a></small>
+                                                    {{ $anuncio->nombre }} {{ $anuncio->apellido }}</b></a></small>
                                         </footer>
                                     </div>
                                 </div>
