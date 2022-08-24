@@ -40,7 +40,7 @@ class UsuarioIndex extends Component
             ->orwhere('is_admin', 'LIKE', '%' . $this->search . '%')
             ->orwhere('departamento', 'LIKE', '%' . $this->search . '%')
             ->orderBy('is_admin', 'desc')
-            ->paginate(5) : [];
+            ->paginate(10) : [];
         return view('livewire.admin.usuario-index', compact('usuarios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 

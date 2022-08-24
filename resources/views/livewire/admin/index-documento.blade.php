@@ -52,7 +52,7 @@
                     <tbody>
                         @foreach ($documentos as $documento)
                             <tr>
-                                <td>{{ $documento->titulo }}</td>
+                                <td class="">{{ $documento->titulo }}</td>
                                 <td>{{ $documento->created_at }}</td>
                                 @if ($documento->estado == 1)
                                     <td><span class="badge badge-pill badge-success">Activo</span></td>

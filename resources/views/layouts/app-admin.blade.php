@@ -13,14 +13,6 @@
     <!-- Iconos sidebar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 
-    <style>
-        .app {
-            background-color: #32373d;
-            margin: 0;
-            padding: 0;
-            border: 1px solid #0c8461;
-        }
-    </style>
     @livewireStyles
 </head>
 
@@ -60,15 +52,8 @@
                     <a href="{{ route('admin.documentos-index') }}"><span class="fa fa-file mr-3"></span>
                         Documentos</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown"><i
-                            class="fa fa-cog" aria-hidden="true"></i> Opciones</a>
-                    <ul class="dropdown-menu app text-left">
-                        <li><a class="dropdown-item" href="{{ route('admin.edit') }}"> <i
-                                    class="fa fa-address-card"></i> Cambiar contraseña</a>
-                        </li>
-                        @livewire('iniciar-sesion.logout')
-                    </ul>
+                <li>
+                   @livewire('iniciar-sesion.logout')
                 </li>
             </ul>
 

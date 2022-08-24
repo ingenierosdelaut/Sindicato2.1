@@ -26,9 +26,7 @@ class AnuncioEdit extends Component
     public function editarAnuncio()
     {
         $this->validate();
-        $this->anuncio->id_usuario = auth()->user()->id;
         if ($this->url_img != null) {
-            dd($this->url_img);
             if ($this->anuncio->url_img != null) {
                 Storage::disk('public')->delete($this->anuncio->url_img);
             }

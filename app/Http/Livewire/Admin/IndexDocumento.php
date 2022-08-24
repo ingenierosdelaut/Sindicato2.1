@@ -30,7 +30,7 @@ class IndexDocumento extends Component
         $documentos =  ($this->cargado == true) ? Documento::where('titulo', 'LIKE', '%' . $this->search . '%')
             ->orwhere('created_at', 'LIKE', '%' . $this->search . '%')
             ->orwhere('estado', 'LIKE', '%' . $this->search . '%')
-            ->orderby('estado', 'desc')->paginate(5) : [];
+            ->orderby('estado', 'desc')->paginate(10) : [];
         return view('livewire.admin.index-documento', compact('documentos'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 

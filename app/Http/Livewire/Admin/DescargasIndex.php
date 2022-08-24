@@ -34,7 +34,7 @@ class DescargasIndex extends Component
                 'documentos.titulo',
                 'usuarios.nombre',
                 'usuarios.apellido'
-            )->orderBy('descargas.created_at', 'asc')->paginate(5);
+            )->orderBy('descargas.created_at', 'asc')->paginate(10);
         return view('livewire.admin.descargas-index', compact('descargas'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 

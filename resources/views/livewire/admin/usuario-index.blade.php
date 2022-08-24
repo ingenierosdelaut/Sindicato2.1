@@ -68,9 +68,11 @@
                             <tr>
                                 @if ($usuario->is_admin == 1)
                                     <td scope="row">
-                                        <p><span style="color:#177c67">SUTUT</span><span style="color:grey">
-                                                Admin</span>
-                                            <b> {{ $usuario->nombre }} {{ $usuario->apellido }} </b>
+                                        <p>
+                                            <b> <span
+                                                    style="color:#177c67;">{{ $usuario->nombre }}</span>
+                                                <span style="color:grey;">
+                                                    {{ $usuario->apellido }}</span> </b>
                                         </p>
                                     </td>
                                 @else
@@ -96,12 +98,22 @@
                                 @endif --}}
 
                                 <td>
-                                    <a type="button" href="{{ route('admin.show-user', $usuario) }}"
-                                        title="Información del usuario(Vista previa)"
-                                        class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
-                                    <a type="button" href="{{ route('admin.user-edit', $usuario) }}"
-                                        title="Editar información del usuario" class="btn btn-primary btn-sm "><i
-                                            class="fa fa-edit fa-sm"></i></a>
+
+                                    @if ($usuario->is_admin == 1)
+                                        <a type="button" href="{{ route('show.admin', $usuario) }}"
+                                            title="Información del adminstrador(Vista previa)"
+                                            class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
+                                        <a type="button" href="{{ route('edit.admin', $usuario) }}"
+                                            title="Editar información del administrador"
+                                            class="btn btn-primary btn-sm "><i class="fa fa-edit fa-sm"></i></a>
+                                    @else
+                                        <a type="button" href="{{ route('admin.show-user', $usuario) }}"
+                                            title="Información del usuario(Vista previa)"
+                                            class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
+                                        <a type="button" href="{{ route('admin.user-edit', $usuario) }}"
+                                            title="Editar información del agremiado" class="btn btn-primary btn-sm "><i
+                                                class="fa fa-edit fa-sm"></i></a>
+                                    @endif
                                     @if ($usuario->estado == 1)
                                         <button wire:click="disable({{ $usuario->id }})" type="button"
                                             title="Desactivar usuario" class="btn btn-warning btn-sm"><i

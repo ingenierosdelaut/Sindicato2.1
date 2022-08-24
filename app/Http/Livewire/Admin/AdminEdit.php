@@ -15,8 +15,8 @@ class AdminEdit extends Component
 
     public function render()
     {
-        $idUser = Auth::user()->id;
-        $this->usuario = Usuario::find($idUser);
+        // $idUser = Auth::user()->id;
+        // $this->usuario = Usuario::find($idUser);
         return view('livewire.admin.admin-edit')->layout('layouts.app-admin')->slot('slotAdmin');
     }
 

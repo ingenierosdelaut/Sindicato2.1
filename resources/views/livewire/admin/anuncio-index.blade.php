@@ -1,8 +1,8 @@
 <div wire:init="cargando">
 
-    <head>
+    {{-- <head>
         <link rel="stylesheet" href="{{ asset('static/css/inputs.css') }}">
-    </head>
+    </head> --}}
 
 
     <div class="row">
@@ -52,7 +52,7 @@
                         @foreach ($anuncios as $anuncio)
                             <tr>
                                 <td scope='row'>
-                                    <div style="width: 250px; overflow: hidden;">{{ $anuncio->titulo }}</div>
+                                    <div style="width: 150px; overflow: hidden;">{{ $anuncio->titulo }}</div>
                                 </td>
                                 <td>
                                     <div style="width: 450px; overflow: hidden;">{{ $anuncio->contenido }}</div>
@@ -85,7 +85,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
             @else
                 <div class="progress">
@@ -98,6 +97,7 @@
 
     {{ $cargado == true ? $anuncios->links() : null }}
 
+    {{-- Modal --}}
     <div wire:ignore.self class="modal" data-backdrop="static" id="exampleModalAnuncioDel" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -136,4 +136,5 @@
             </div>
         </div>
     </div>
+
 </div>

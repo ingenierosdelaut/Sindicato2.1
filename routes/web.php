@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Admin\AdminEdit;
+use App\Http\Livewire\Admin\AdminShow;
 use App\Http\Livewire\Admin\AdminView;
 use App\Http\Livewire\Admin\AnuncioCreate;
 use App\Http\Livewire\Admin\AnuncioDelete;
@@ -55,17 +56,21 @@ Route::get('/login', Login::class)->name('login');
 Route::get('/admin/crear-nuevos-admin', CreateAdmin::class)->name('crear.admin');
 
 Route::group(['middleware' => 'auth'], function () {
-    //Admin
+    //Admin usuarios
     Route::get('/admin/home', AdminView::class)->name('admin.view')->middleware('auth.admin');
     Route::get('/admin/usuarios', UsuarioIndex::class)->name('admin.usuarios')->middleware('auth.admin');
     Route::post('/admin/usuarios', UsuarioIndex::class)->name('admin.usuarios')->middleware('auth.admin');
     Route::get('/admin/usuarios/crear-usuario', UsuarioCreate::class)->name('admin.create-user')->middleware('auth.admin');
     Route::get('/admin/usuarios/{usuario}/editar-usuario', UsuariosEdit::class)->name('admin.user-edit')->middleware('auth.admin');
-    Route::get('/admin/usuarios/{usuario}/usuario', UsuarioShow::class)->name('admin.show-user')->middleware('auth.admin');
+    Route::get('/admin/usuarios/{usuario}/show', UsuarioShow::class)->name('admin.show-user')->middleware('auth.admin');
+    Route::get('/admin/usuario/crear-admin', CreateAdmin::class)->name('admin.create')->middleware('auth.admin');
+    Route::get('/admin/usuario/crear-nuevos-admin', CreateAdmin::class)->name('crear.admin')->middleware('auth.admin');
+    Route::get('/admin/usuario/{usuario}/admin', AdminEdit::class)->name('edit.admin')->middleware('auth.admin');
+    Route::get('/admin/usuario/{usuario}/show', AdminShow::class)->name('show.admin')->middleware('auth.admin');
+
     Route::get('/admin/usuarios/generar-pdf/', [UsuarioIndex::class, 'generatePDF'])->name('admin.users.pdf')->middleware('auth.admin');
     Route::get('/admin/usuarios/generar-pdf/{search}', [UsuarioIndex::class, 'generatePDF'])->name('admin.users.pdf')->middleware('auth.admin');
     Route::get('/admin/usuarios/export-excel', [UsuarioIndex::class, 'exportExcel'])->name('admin.users.excel')->middleware('auth.admin');
-    Route::get('/admin/usuario/crear-admin', CreateAdmin::class)->name('admin.create')->middleware('auth.admin');
 
     //Admin Edit
     Route::get('/admin/editar-info', AdminEdit::class)->name('admin.edit')->middleware('auth.admin');

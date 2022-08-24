@@ -66,7 +66,7 @@
                                     <!--Motivo-->
                                     @if ($request->motivo != null)
                                         <td>
-                                            <div style="width: 500px; overflow: hidden;">
+                                            <div style="width: 450px; overflow: hidden;">
                                                 {{ $request->motivo }}
                                             </div>
                                         </td>
@@ -101,8 +101,8 @@
                                                         Escribir el motivo por el cual se denegó
                                                         la solicitud</h5>
                                                     <button type="button" class="bt-sm btn-close"
-                                                        style="border: 1px solid black; border-radius: 4px;" data-bs-dismiss="modal"
-                                                        aria-label="Close">&times;</button>
+                                                        style="border: 1px solid black; border-radius: 4px;"
+                                                        data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <h3>Solicitante:</h3>
@@ -114,9 +114,9 @@
                                                         <div class="mb-3">
                                                             <label style="color: black" for="recipient-name"
                                                                 class="col-form-label">Especificaciones:</label>
-                                                            <div wire:ignore.self class="contador" id="caracters"></div>
                                                             <textarea id="contar" wire:model="request.motivo" placeholder="Ejemplo: De denego porque..." type="text"
                                                                 maxlength="200" class="form-control"></textarea>
+                                                            <div wire:ignore.self class="contador" id="caracters"></div>
                                                             @error('request.motivo')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror

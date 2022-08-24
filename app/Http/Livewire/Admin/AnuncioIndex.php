@@ -44,7 +44,7 @@ class AnuncioIndex extends Component
                 'usuarios.nombre',
                 'usuarios.apellido',
                 // 'usuarios.estado'
-            )->orderby('created_at', 'desc')->paginate(4) : [];
+            )->orderby('created_at', 'desc')->paginate(10) : [];
         return view('livewire.admin.anuncio-index', compact('anuncios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 

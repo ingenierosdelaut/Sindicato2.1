@@ -18,9 +18,9 @@ class ReglasAdmin
     {
         $validarpassword = ($id) ? 'required|min:8' : 'required|min:8';
         return [
-            'usuario.nombre' => 'required|string',
-            'usuario.apellido' => 'required|string',
-            'usuario.email' => 'required|email|unique:usuarios,email,' . $id,
+            'usuario.nombre' => 'nullable|string',
+            'usuario.apellido' => 'nullable|string',
+            'usuario.email' => 'nullable|email|unique:usuarios,email,' . $id,
             'password'=> $validarpassword,
             'confirm_password' => 'same:password|required'
         ];
