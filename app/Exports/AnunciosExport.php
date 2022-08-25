@@ -3,9 +3,8 @@
 namespace App\Exports;
 
 use App\Models\Anuncio;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 class AnunciosExport implements FromView, WithColumnWidths
@@ -13,7 +12,7 @@ class AnunciosExport implements FromView, WithColumnWidths
     public function view(): View
     {
         return view('livewire.admin.anunciosExcel', [
-            'anuncios' => Anuncio::all()
+            'anuncios' => Anuncio::all(),
         ]);
     }
 
@@ -24,7 +23,7 @@ class AnunciosExport implements FromView, WithColumnWidths
             'B' => 45,
             'C' => 168,
             'D' => 20,
-            'E' => 29
+            'E' => 29,
         ];
     }
 }

@@ -2,15 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Exports\FilterUserExport;
-use App\Exports\UsuariosExport;
 use App\Exports\UsuariosExports;
 use App\Models\Usuario;
-use Barryvdh\DomPDF\PDF;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
@@ -18,9 +13,13 @@ use Maatwebsite\Excel\Facades\Excel;
 class UsuarioIndex extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
+
     public $search = '';
+
     public $cargado = false;
+
     public $estado;
 
     public function mount()
@@ -30,17 +29,18 @@ class UsuarioIndex extends Component
 
     public function render()
     {
-        $usuarios = ($this->cargado == true) ? Usuario::where('nombre', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('tipo_agremiado', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('apellido', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('estado', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('puestoA', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('puestoD', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('carrera', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('is_admin', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('departamento', 'LIKE', '%' . $this->search . '%')
+        $usuarios = ($this->cargado == true) ? Usuario::where('nombre', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('tipo_agremiado', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('apellido', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('estado', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('puestoA', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('puestoD', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('carrera', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('is_admin', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('departamento', 'LIKE', '%'.$this->search.'%')
             ->orderBy('is_admin', 'desc')
             ->paginate(10) : [];
+
         return view('livewire.admin.usuario-index', compact('usuarios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
@@ -52,23 +52,24 @@ class UsuarioIndex extends Component
         $date = $now->format('d-m-Y');
 
         if ($search != '') {
-
-            $usuarios = Usuario::where('nombre', 'LIKE', '%' . $search . '%')
-                ->orwhere('tipo_agremiado', 'LIKE', '%' . $search . '%')
-                ->orwhere('apellido', 'LIKE', '%' . $search . '%')
-                ->orwhere('estado', 'LIKE', '%' . $search . '%')
-                ->orwhere('puestoA', 'LIKE', '%' . $search . '%')
-                ->orwhere('puestoD', 'LIKE', '%' . $search . '%')
-                ->orwhere('carrera', 'LIKE', '%' . $search . '%')
-                ->orwhere('is_admin', 'LIKE', '%' . $search . '%')
-                ->orwhere('departamento', 'LIKE', '%' . $search . '%')->get();
+            $usuarios = Usuario::where('nombre', 'LIKE', '%'.$search.'%')
+                ->orwhere('tipo_agremiado', 'LIKE', '%'.$search.'%')
+                ->orwhere('apellido', 'LIKE', '%'.$search.'%')
+                ->orwhere('estado', 'LIKE', '%'.$search.'%')
+                ->orwhere('puestoA', 'LIKE', '%'.$search.'%')
+                ->orwhere('puestoD', 'LIKE', '%'.$search.'%')
+                ->orwhere('carrera', 'LIKE', '%'.$search.'%')
+                ->orwhere('is_admin', 'LIKE', '%'.$search.'%')
+                ->orwhere('departamento', 'LIKE', '%'.$search.'%')->get();
             $pdf = App::make('dompdf.wrapper');
             $pdf->loadView('livewire.admin.pdfUsers', ['usuarios' => $usuarios, 'data' => $data, 'date' => $date]);
+
             return $pdf->setPaper('a4', 'landscape')->stream();
         } else {
             $usuarios = Usuario::all();
             $pdf = App::make('dompdf.wrapper');
             $pdf->loadView('livewire.admin.pdfUsers', ['usuarios' => $usuarios, 'data' => $data, 'date' => $date]);
+
             return $pdf->setPaper('a4', 'landscape')->stream();
         }
     }
@@ -77,7 +78,6 @@ class UsuarioIndex extends Component
     {
         return Excel::download(new UsuariosExports, 'usuarios.xlsx');
     }
-
 
     public function cargando()
     {

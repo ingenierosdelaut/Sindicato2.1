@@ -25,7 +25,6 @@ use App\Http\Livewire\Documentos\DocumentosIndex;
 use App\Http\Livewire\Index;
 use App\Http\Livewire\IniciarSesion\Login;
 use App\Http\Livewire\Requests\RequestCreate;
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/anuncios', AnuncioIndex::class)->name('admin.anuncios');
     Route::get('/admin/anuncios/crear-anuncio', AnuncioCreate::class)->name('admin.anuncio-create')->middleware('auth.admin');
     Route::get('/admin/anuncios/{anuncio}/editar-anuncio', AnuncioEdit::class)->name('admin.anuncio-edit')->middleware('auth.admin');
-    Route::get('/admin/anuncio/{anuncio}/eliminar', AnuncioDelete::class)->name('admin.anuncio-delete')->middleware('auth.admin');
+    //Route::get('/admin/anuncio/{anuncio}/eliminar', AnuncioIndex::class)->name('admin.anuncio-delete')->middleware('auth.admin');
     Route::get('/admin/anuncios/generar-pdf', [AnuncioIndex::class, 'generatePDF'])->name('admin.anuncio.pdf')->middleware('auth.admin');
     Route::get('/admin/anuncios/generar-pdf/{search}', [AnuncioIndex::class, 'generatePDF'])->name('admin.anuncio.pdf')->middleware('auth.admin');
     Route::get('/admin/anuncios/export-excel', [AnuncioIndex::class, 'exportExcel'])->name('admin.anuncio.excel')->middleware('auth.admin');

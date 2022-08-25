@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire\Admin;
 
-use Livewire\Component;
 use App\Models\Anuncio;
 use App\Models\Request;
 use App\Models\Usuario;
-use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 use Livewire\WithPagination;
 
 class AdminView extends Component
 {
     use WithPagination;
+
     public $cargado = false;
+
     public $search = '';
 
     public function mount()
@@ -23,14 +24,15 @@ class AdminView extends Component
     public function render()
     {
         $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
-            ->where('titulo', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('contenido', 'LIKE', '%' . $this->search . '%')
+            ->where('titulo', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('contenido', 'LIKE', '%'.$this->search.'%')
             ->select(
                 'anuncios.*',
                 'usuarios.nombre',
                 'usuarios.apellido'
             )->latest()->paginate(10);
         $requests = Request::where('estado', 0)->count();
+
         return view('livewire.admin.admin-view', compact('anuncios', 'requests'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 

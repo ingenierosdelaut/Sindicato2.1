@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Request extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'estado',
         'fecha',
         'id_usuario',
-        'motivo'
+        'motivo',
     ];
-    use HasFactory;
 
+    use HasFactory;
 }

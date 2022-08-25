@@ -10,7 +10,9 @@ use Livewire\Component;
 class AdminEdit extends Component
 {
     public Usuario $usuario;
+
     public $confirm_password;
+
     public $password;
 
     public function render()
@@ -28,6 +30,7 @@ class AdminEdit extends Component
         }
         $this->usuario->save();
         $this->emit('alert-user-admin-edit', 'Se ha modificado correctamente al administrador');
+
         return redirect(route('admin.view'));
     }
 

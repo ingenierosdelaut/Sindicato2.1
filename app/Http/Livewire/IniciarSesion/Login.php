@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\IniciarSesion;
 
-use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Login extends Component
 {
     public $email;
+
     public $password;
 
     public function render()
@@ -39,7 +39,7 @@ class Login extends Component
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|min:8|string'
+            'password' => 'required|min:8|string',
         ];
     }
 }

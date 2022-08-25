@@ -12,16 +12,15 @@ class DocumentosIndex extends Component
     public function render()
     {
         $documentos = Documento::all();
+
         return view('livewire.documentos.documentos-index', compact('documentos'))->layout('layouts.app-user')->slot('slotUser');
     }
-
-
 
     public function descarga($id)
     {
         Descarga::create([
-            'usuario_id'=> auth()->user()->id,
-            'doc_id'=>$id
+            'usuario_id' => auth()->user()->id,
+            'doc_id' => $id,
         ]);
 
         $documento = Documento::find($id);

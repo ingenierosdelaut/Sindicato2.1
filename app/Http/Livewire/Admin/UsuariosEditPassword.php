@@ -10,14 +10,16 @@ use Livewire\Component;
 class UsuariosEditPassword extends Component
 {
     public Usuario $usuario;
-    public $password;
-    public $confirm_password;
 
+    public $password;
+
+    public $confirm_password;
 
     public function render()
     {
         $idUser = Auth::user()->id;
         $this->usuario = Usuario::find($idUser);
+
         return view('livewire.admin.usuarios-edit-password')->layout('layouts.app-user')->slot('slotUser');
     }
 

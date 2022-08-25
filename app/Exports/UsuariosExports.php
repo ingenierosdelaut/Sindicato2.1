@@ -3,14 +3,11 @@
 namespace App\Exports;
 
 use App\Models\Usuario;
-use Carbon\Carbon;
-use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithBackgroundColor;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use Maatwebsite\Excel\Concerns\WithDefaultStyles;
-use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Color;
@@ -33,7 +30,7 @@ class UsuariosExports implements FromView, WithColumnWidths, WithBackgroundColor
     public function view(): View
     {
         return view('livewire.admin.usuariosExcel', [
-            'usuarios' => Usuario::all()
+            'usuarios' => Usuario::all(),
         ]);
     }
 

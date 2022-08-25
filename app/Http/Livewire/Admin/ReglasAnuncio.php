@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Admin;
 
-
 class ReglasAnuncio
 {
     public static function reglas()

@@ -7,14 +7,16 @@ use App\Models\Usuario;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-
-
 class RequestCreate extends Component
 {
     use WithPagination;
+
     public Request $request;
+
     public $estado;
+
     public Usuario $usuario;
+
     protected $paginationTheme = 'bootstrap';
 
     public function mount()
@@ -28,6 +30,7 @@ class RequestCreate extends Component
         ->orderby('created_at', 'desc')
         ->paginate(3);
         $usuarios = Usuario::all();
+
         return view('livewire.requests.requests-create', compact('usuarios', 'requests'))->layout('layouts.app-user')->slot('slotUser');
     }
 
@@ -38,6 +41,7 @@ class RequestCreate extends Component
         $this->validate();
         $this->request->save();
         $this->emit('alerta-request-create', 'Se realizó la solicitud con exito');
+
         return redirect(route('requests.create'));
     }
 
@@ -48,7 +52,6 @@ class RequestCreate extends Component
 
         return redirect(route('requests.create'));
     }
-
 
     protected function rules()
     {

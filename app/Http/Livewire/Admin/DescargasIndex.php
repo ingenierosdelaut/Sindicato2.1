@@ -19,22 +19,27 @@ class DescargasIndex extends Component
     }
 
     use WithPagination;
+
     public $search = '';
+
     protected $paginationTheme = 'bootstrap';
+
     public $cargado = false;
+
     public function render()
     {
         $descargas = Descarga::join('usuarios', 'usuario_id', '=', 'usuarios.id')
             ->join('documentos', 'doc_id', '=', 'documentos.id')
-            ->where('titulo', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('nombre', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('apellido', 'LIKE', '%' . $this->search . '%')
+            ->where('titulo', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('nombre', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('apellido', 'LIKE', '%'.$this->search.'%')
             ->select(
                 'descargas.*',
                 'documentos.titulo',
                 'usuarios.nombre',
                 'usuarios.apellido'
             )->orderBy('descargas.created_at', 'asc')->paginate(10);
+
         return view('livewire.admin.descargas-index', compact('descargas'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
@@ -46,12 +51,11 @@ class DescargasIndex extends Component
         $date = $now->format('d-m-Y');
 
         if ($search != '') {
-
             $descargas = Descarga::join('usuarios', 'usuario_id', '=', 'usuarios.id')
                 ->join('documentos', 'doc_id', '=', 'documentos.id')
-                ->where('titulo', 'LIKE', '%' . $search . '%')
-                ->orwhere('nombre', 'LIKE', '%' . $search . '%')
-                ->orwhere('apellido', 'LIKE', '%' . $search . '%')
+                ->where('titulo', 'LIKE', '%'.$search.'%')
+                ->orwhere('nombre', 'LIKE', '%'.$search.'%')
+                ->orwhere('apellido', 'LIKE', '%'.$search.'%')
                 ->select(
                     'descargas.*',
                     'documentos.titulo',
@@ -60,6 +64,7 @@ class DescargasIndex extends Component
                 )->get();
             $pdf = App::make('dompdf.wrapper');
             $pdf->loadView('livewire.admin.pdfDescargas', ['descargas' => $descargas, 'data' => $data, 'date' => $date]);
+
             return $pdf->setPaper('a4', 'landscape')->stream();
         } else {
             $descargas = Descarga::join('usuarios', 'usuario_id', '=', 'usuarios.id')
@@ -72,6 +77,7 @@ class DescargasIndex extends Component
                 )->get();
             $pdf = App::make('dompdf.wrapper');
             $pdf->loadView('livewire.admin.pdfDescargas', ['descargas' => $descargas, 'data' => $data, 'date' => $date]);
+
             return $pdf->setPaper('a4', 'landscape')->stream();
         }
     }

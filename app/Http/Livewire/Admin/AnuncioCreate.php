@@ -3,28 +3,29 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Anuncio;
-use App\Models\Usuario;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
 
 class AnuncioCreate extends Component
 {
-
     public function mount()
     {
         $this->anuncio = new Anuncio();
     }
 
     use WithFileUploads;
-    public Anuncio $anuncio;
-    public $url_img;
-    public $estado;
 
+    public Anuncio $anuncio;
+
+    public $url_img;
+
+    public $estado;
 
     public function render()
     {
         $anuncios = Anuncio::where('id_usuario', auth()->user()->id)->paginate(5);
+
         return view('livewire.admin.anuncio-create', compact('anuncios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
@@ -38,7 +39,8 @@ class AnuncioCreate extends Component
         $this->anuncio->estado = 1;
         $this->anuncio->save();
         $this->emit('alert-anuncio-create', 'Se ha publicado correctamente el anuncio');
-        return redirect(route("admin.view"));
+
+        return redirect(route('admin.view'));
     }
 
     public function rules()

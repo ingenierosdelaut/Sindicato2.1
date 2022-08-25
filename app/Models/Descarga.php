@@ -11,6 +11,6 @@ class Descarga extends Model
 
     protected $fillable = [
         'usuario_id',
-        'doc_id'
+        'doc_id',
     ];
 }

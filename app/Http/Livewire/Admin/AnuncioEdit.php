@@ -10,7 +10,9 @@ use Livewire\WithFileUploads;
 class AnuncioEdit extends Component
 {
     use WithFileUploads;
+
     public Anuncio $anuncio;
+
     public $url_img;
 
     public function mount($anuncio)
@@ -34,6 +36,7 @@ class AnuncioEdit extends Component
         }
         $this->anuncio->save();
         $this->emit('alert-anuncio-edit', 'Has modificado correctamente el anuncio');
+
         return redirect(route('admin.view'));
     }
 

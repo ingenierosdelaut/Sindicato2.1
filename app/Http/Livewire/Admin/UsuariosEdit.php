@@ -5,27 +5,35 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class UsuariosEdit extends Component
 {
     public Usuario $usuario;
+
     public $confirm_password;
+
     public $password;
+
     public $rfc;
+
     public $curp;
+
     public $ine;
+
     public $tipo_agremiado;
+
     public $puestoA;
+
     public $puestoD;
+
     public $carrera;
+
     public $departamento;
 
     public function render()
     {
         return view('livewire.admin.usuarios-edit')->layout('layouts.app-admin')->slot('slotAdmin');
     }
-
 
     public function editar()
     {
@@ -46,6 +54,7 @@ class UsuariosEdit extends Component
         $this->usuario->ine = strtoupper($this->usuario->ine);
         $this->usuario->save();
         $this->emit('alert-user-edit', 'Se ha modificado correctamente al usuario');
+
         return redirect(route('admin.usuarios'));
     }
 

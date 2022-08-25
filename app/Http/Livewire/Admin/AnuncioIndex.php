@@ -3,13 +3,10 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Exports\AnunciosExport;
-use App\Models\Admin;
 use App\Models\Anuncio;
-use App\Models\Request;
 use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -22,22 +19,27 @@ class AnuncioIndex extends Component
         $this->anuncio = new Anuncio();
     }
 
-
     use WithPagination;
     use WithFileUploads;
+
     public $search = '';
+
     public $url_img;
+
     public $estado;
+
     public $cargado = false;
+
     public Anuncio $anuncio;
+
     protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
         $anuncios = ($this->cargado == true) ? Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
-            ->where('titulo', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('contenido', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('nombre', 'LIKE', '%' . $this->search . '%')
+            ->where('titulo', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('contenido', 'LIKE', '%'.$this->search.'%')
+            ->orwhere('nombre', 'LIKE', '%'.$this->search.'%')
             //->orwhere('estado', 'LIKE', '%' . $this->search . '%')
             ->select(
                 'anuncios.*',
@@ -45,6 +47,7 @@ class AnuncioIndex extends Component
                 'usuarios.apellido',
                 // 'usuarios.estado'
             )->orderby('created_at', 'desc')->paginate(10) : [];
+
         return view('livewire.admin.anuncio-index', compact('anuncios'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
@@ -57,9 +60,9 @@ class AnuncioIndex extends Component
 
         if ($search != '') {
             $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
-                ->where('titulo', 'LIKE', '%' . $search . '%')
-                ->orwhere('contenido', 'LIKE', '%' . $search . '%')
-                ->orwhere('nombre', 'LIKE', '%' . $search . '%')
+                ->where('titulo', 'LIKE', '%'.$search.'%')
+                ->orwhere('contenido', 'LIKE', '%'.$search.'%')
+                ->orwhere('nombre', 'LIKE', '%'.$search.'%')
                 ->select(
                     'anuncios.*',
                     'usuarios.nombre',
@@ -67,6 +70,7 @@ class AnuncioIndex extends Component
                 )->get();
             $pdf = App::make('dompdf.wrapper');
             $pdf->loadView('livewire.admin.pdfAnuncios', ['anuncios' => $anuncios, 'data' => $data, 'date' => $date]);
+
             return $pdf->setPaper('a4', 'landscape')->stream();
         } else {
             $anuncios = Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
@@ -77,6 +81,7 @@ class AnuncioIndex extends Component
                 )->get();
             $pdf = App::make('dompdf.wrapper');
             $pdf->loadView('livewire.admin.pdfAnuncios', ['anuncios' => $anuncios, 'data' => $data, 'date' => $date]);
+
             return $pdf->setPaper('a4', 'landscape')->stream();
         }
     }
@@ -102,13 +107,12 @@ class AnuncioIndex extends Component
         $this->emit('alert-anuncio-enable', 'Has activado a este anuncio.');
     }
 
-    public function delete($id)
+    public function delete(Anuncio $anuncio)
     {
-        $anuncio = Anuncio::find($id);
-        $anuncio = Storage::disk('public')->delete($this->url_img);
-        $anuncio->save();
+        $anuncio->delete();
         $this->emit('alert-anuncio-delete', 'Has eliminado correctamente este anuncio');
-        return redirect(route("admin.anuncios"));
+
+        return redirect(route('admin.anuncios'));
     }
 
     public function cargando()

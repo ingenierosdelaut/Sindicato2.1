@@ -12,6 +12,6 @@ class Documento extends Model
     protected $fillable = [
         'titulo',
         'url_doc',
-        'estado'
+        'estado',
     ];
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Http\Livewire\Admin\ReglasAdmin;
-use App\Http\Livewire\Admin\ReglasUsuario;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -17,10 +16,15 @@ class CreateAdmin extends Component
     }
 
     use WithFileUploads;
+
     public Usuario $usuario;
+
     public $password;
+
     public $confirm_password;
+
     public $estado;
+
     public $is_admin;
 
     public function render()
@@ -36,9 +40,9 @@ class CreateAdmin extends Component
         $this->usuario->estado = 1;
         $this->usuario->save();
         $this->emit('alert-user-admin-create', 'Has creado un nuevo administrador');
+
         return redirect(route('admin.usuarios'));
     }
-
 
     protected function rules()
     {

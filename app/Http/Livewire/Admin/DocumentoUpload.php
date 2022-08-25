@@ -9,7 +9,9 @@ use Livewire\Component;
 class DocumentoUpload extends Component
 {
     public $estado;
+
     public Documento $documento;
+
     public function render()
     {
         return view('livewire.admin.documento-upload');
@@ -18,9 +20,8 @@ class DocumentoUpload extends Component
     public function fileUpload(Request $req)
     {
         $req->validate([
-            'file' => 'required|mimes:doc,docx,pdf|max:2048'
+            'file' => 'required|mimes:doc,docx,pdf|max:2048',
         ]);
-
 
         $fileModel = new Documento();
         if ($req->file()) {

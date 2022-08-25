@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Admin;
 
-
 class ReglasUsuario
 {
     public static function reglas($id = null)
@@ -10,7 +9,7 @@ class ReglasUsuario
         return [
             'usuario.nombre' => 'required|string',
             'usuario.apellido' => 'required|string',
-            'usuario.email' => 'required|email|unique:usuarios,email,' . $id,
+            'usuario.email' => 'required|email|unique:usuarios,email,'.$id,
             'usuario.telefono' => 'required|string|max:11',
             'usuario.estadoCivil' => 'required|string',
             'usuario.ciudad' => 'required|string',
@@ -38,6 +37,7 @@ class ReglasUsuario
     public static function reglasPWD($id = null)
     {
         $validarpassword = ($id) ? 'required|min:8' : 'required|min:8';
+
         return [
             'password' => $validarpassword,
             'confirm_password' => 'same:password|required',

@@ -7,7 +7,7 @@ class ReglasMotivo
     public static function reglas()
     {
         return [
-            'request.motivo' => 'required|string|max:200'
+            'request.motivo' => 'required|string|max:200',
         ];
     }
 }
