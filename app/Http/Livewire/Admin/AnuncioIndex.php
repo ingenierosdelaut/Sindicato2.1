@@ -102,9 +102,11 @@ class AnuncioIndex extends Component
         $this->emit('alert-anuncio-enable', 'Has activado a este anuncio.');
     }
 
-    public function delete(Anuncio $anuncio)
+    public function delete($id)
     {
-        $anuncio->delete();
+        $anuncio = Anuncio::find($id);
+        $anuncio = Storage::disk('public')->delete($this->url_img);
+        $anuncio->save();
         $this->emit('alert-anuncio-delete', 'Has eliminado correctamente este anuncio');
         return redirect(route("admin.anuncios"));
     }

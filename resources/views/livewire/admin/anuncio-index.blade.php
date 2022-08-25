@@ -67,8 +67,9 @@
                                 <td>
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-dismiss="modal" title="Eliminar anuncio"
-                                        data-bs-target="#exampleModalAnuncioDel" data-backdrop="false"
-                                        data-bs-whatever="@mdo"><i class="fa fa-trash"></i></button>
+                                        data-bs-target="#exampleModalAnuncioDel{{ $anuncio->id }}"
+                                        data-backdrop="false" data-bs-whatever="@mdo"><i
+                                            class="fa fa-trash"></i></button>
                                     <a href="{{ route('admin.anuncio-edit', $anuncio) }}" title="Editar anuncio"
                                         type="button" class="btn-sm btn-info"><i class="fa fa-edit"></i></a>
                                     @if ($anuncio->estado == 1)
@@ -83,6 +84,53 @@
                                     @endif
                                 </td>
                             </tr>
+                            {{-- Modal --}}
+                            <div wire:ignore.self class="modal" data-backdrop="static"
+                                id="exampleModalAnuncioDel{{ $anuncio->id }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content text-center">
+                                        <form wire:submit="delete">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">¿Deseas eliminar este
+                                                    anuncio?</h5>
+                                                <button type="button" class="btn-sm btn-close"
+                                                    style="border: 1px solid black;" data-bs-dismiss="modal"
+                                                    aria-label="Close">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <h5><b>Titulo del anuncio:</b></h5>
+                                                        <p style="color: black">{{ $anuncio->titulo }}</p>
+
+                                                        <h5><b>Contenido del anuncio:</b></h5>
+                                                        <p style="color: black">{{ $anuncio->contenido }}</p>
+
+                                                        <h5><b>Imagen:</b></h5>
+
+                                                        @if ($anuncio->url_img)
+                                                            <img src="{{ Storage::disk('public')->url($anuncio->url_img) }}"
+                                                                class="mx-auto d-block"
+                                                                style="border-radius: 10px; width: 350px; height: 300px;"
+                                                                alt="">
+                                                        @else
+                                                            <p>No hay imagen <i class="fa fa-bullhorn"
+                                                                    aria-hidden="true"></i></p>
+                                                        @endif
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button wire:click="delete({{ $anuncio->id }})"
+                                                    style="background-color: #0c8461; border: none;" type="button"
+                                                    class="btn btn-success">Enviar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -97,44 +145,6 @@
 
     {{ $cargado == true ? $anuncios->links() : null }}
 
-    {{-- Modal --}}
-    <div wire:ignore.self class="modal" data-backdrop="static" id="exampleModalAnuncioDel" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content text-center">
-                <form wire:submit="delete">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">¿Deseas eliminar este anuncio?</h5>
-                        <button type="button" class="btn-sm btn-close" style="border: 1px solid black;" data-bs-dismiss="modal"
-                            aria-label="Close">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <h5><b>Titulo del anuncio:</b></h5>
-                                <p style="color: black">{{ $anuncio->titulo }}</p>
 
-                                <h5><b>Contenido del anuncio:</b></h5>
-                                <p style="color: black">{{ $anuncio->contenido }}</p>
-
-                                <h5><b>Imagen:</b></h5>
-                                @if ($url_img != null)
-                                    <img class="img-fluid" width="350" height="350"
-                                        src="{{ Storage::disk('public')->url($anuncio->url_img) }}"
-                                        class="card-img-top" alt="">
-                                @else
-                                    <p>No hay imagen <i class="fa fa-bullhorn" aria-hidden="true"></i></p>
-                                @endif
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button wire:click="delete({{ $anuncio->id }})" style="background-color: #0c8461; border: none;" type="button"
-                            class="btn btn-success">Enviar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 </div>

@@ -33,11 +33,17 @@
 
 
             <div class="row container">
+
                 @if ($url_img != null)
                     <div class="col">
                         <img class="mx-auto d-block" style="border-radius: 10px; width: 300px; height: 300px;"
                             src="{{ $url_img->temporaryUrl() }}" alt="">
                     </div>
+                @endif
+
+                @if ($anuncio->url_img)
+                    <img src="{{ Storage::disk('public')->url($anuncio->url_img) }}" class="mx-auto d-block"
+                        style="border-radius: 10px; width: 350px; height: 300px;" alt="">
                 @else
                     <p>No hay imagen <i class="fa fa-bullhorn" aria-hidden="true"></i></p>
                 @endif
