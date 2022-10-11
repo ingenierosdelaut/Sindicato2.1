@@ -12,7 +12,12 @@ class AnunciosExport implements FromView, WithColumnWidths
     public function view(): View
     {
         return view('livewire.admin.anunciosExcel', [
-            'anuncios' => Anuncio::all(),
+            'anuncios' => Anuncio::join('usuarios', 'id_usuario', '=', 'usuarios.id')
+                ->select(
+                    'anuncios.*',
+                    'usuarios.nombre',
+                    'usuarios.apellido'
+                )->get(),
         ]);
     }
 

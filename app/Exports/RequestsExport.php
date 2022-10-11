@@ -16,7 +16,7 @@ class RequestsExport implements FromView, WithColumnWidths
                 ->select(
                     'requests.*',
                     'usuarios.nombre',
-                    'usuarios.apellido'
+                    'usuarios.apellido',
                 )->get(),
         ]);
     }
@@ -27,8 +27,8 @@ class RequestsExport implements FromView, WithColumnWidths
             'A' => 3,
             'B' => 35,
             'C' => 11,
-            'D' => 20,
-            'E' => 165,
+            'D' => 23,
+            'E' => 169,
         ];
     }
 }

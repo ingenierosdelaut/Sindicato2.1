@@ -4,7 +4,6 @@
 </head>
 
 <div class="container">
-    {{-- <img src="{{ asset('static/images/sututslrc.png') }}" width="150" height="150" alt=""> --}}
     <h1><span style="color:#177c67">SUTUT</span><span style="color:grey">SLRC</span></h1>
 
     <h2>Lista de solicitudes</h2>
@@ -29,21 +28,18 @@
                 <td>{{ $request->nombre }} {{ $request->apellido }}</td>
                 <!--Estado-->
                 @if ($request->estado == 0)
-                    <td><span class="badge badge-pill badge-warning">Pendiente</span></td>
+                    <td><span>Pendiente</span></td>
                 @elseif ($request->estado == 1)
-                    <td><span class="badge badge-pill badge-success">Aceptada</span></td>
+                    <td><span>Aceptada</span></td>
                 @elseif ($request->estado == 2)
-                    <td><span class="badge badge-pill badge-danger">Denegada</span></td>
+                    <td><span>Denegada</span></td>
+                @elseif ($request->estado == 3)
+                    <td><span>Cancelada</span></td>
                 @endif
                 <!--Fecha-->
                 <td>{{ $request->created_at }}</td>
                 <!--Motivo-->
-                @if ($request->motivo != null)
-                    <td>{{ $request->motivo }}</td>
-                @elseif ($request->estado == 0)
-                @else
-                    <td>Cumplio con los requisitos</td>
-                @endif
+                <td>{{ $request->motivo }}</td>
             </tr>
 
         </tbody>

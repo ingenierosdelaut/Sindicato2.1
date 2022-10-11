@@ -76,7 +76,7 @@ class UsuarioIndex extends Component
 
     public function exportExcel()
     {
-        return Excel::download(new UsuariosExports, 'usuarios.xlsx');
+        return Excel::download(new UsuariosExports, 'Usuarios.xlsx');
     }
 
     public function cargando()

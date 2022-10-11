@@ -6,29 +6,43 @@
 
     <!-- Page Content  -->
     <div>
-        <div class="row">
-            <div class="col-4 mt-4">
+        <div class="row mt-1">
+            <div class="col-4">
                 <div class="input-group ">
                     <span class="input-group-text"><i class="fa fa-search"></i></span>
                     <input wire:model="search" type="text" class="form-control" placeholder="Buscar">
                 </div>
             </div>
-            <form wire:submit.prevent="filtrar">
-                <div class="col mb-2">
-                    <label for="f1">Inicio</label>
-                    <input type="date" wire:model="f1">
-                </div>
-                <div class="col mb-2">
-                    <label for="f2">Fins</label>
-                    <input type="date" wire:model="f2">
-                </div>
-                <div class="col mt-4">
-                    <button class="btn btn-dark btn-sm" type="submit">Buscar</button>
-                </div>
-            </form>
-            <div class="col mt-4">
+
+            <div class="col-5">
+                <form>
+                    {{-- @csrf --}}
+                    <div class="container">
+                        <div class="row">
+                            <div class="container-fluid">
+                                <div class="form-group row">
+                                    <div class="col-sm-5">
+                                        <input wire:model="f1" type="date" id="f1" name="f1" required>
+                                        <label for="f1">Fecha Inicio</label>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <input wire:model="f2" type="date" id="f2" name="f2" required>
+                                        <label for="f2">Fecha Fin</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-dark btn-sm" type="submit"><i
+                                                class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-3">
                 <div class="dropdown">
-                    <button type="button" class="float-right mr-1 btn btn-sm btn-dark dropdown-toggle"
+                    <button type="button" class="float-right mt-1 btn btn-sm btn-dark dropdown-toggle"
                         data-toggle="dropdown"><i class="fa fa-file"></i>
                         Generar reporte
                     </button>
@@ -42,7 +56,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="row">
             <div class="col table-responsive">
@@ -59,6 +72,7 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             @foreach ($requests as $request)
                                 <tr>
                                     <!--Nombre-->
@@ -147,7 +161,8 @@
                                                                 class="col-form-label">Especificaciones:</label>
                                                             <textarea id="contar" wire:model="request.motivo" placeholder="Escribir motivo" type="text" maxlength="200"
                                                                 class="form-control"></textarea>
-                                                            <p wire:ignore.self class="contador" id="caracters"></p>
+                                                            <p wire:ignore.self class="contador" id="caracters">
+                                                            </p>
                                                             @error('request.motivo')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -174,6 +189,7 @@
                         </tbody>
                     </table>
                     {{ $cargado == true ? $requests->links() : null }}
+                    {{ $requests->render() }}
                 @else
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"

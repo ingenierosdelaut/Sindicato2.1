@@ -4,7 +4,6 @@
 </head>
 
 <div class="container">
-    {{-- <img src="{{ asset('static/images/sututslrc.png') }}" width="150" height="150" alt=""> --}}
     <h1><span style="color:#177c67">SUTUT</span><span style="color:grey">SLRC</span></h1>
 
     <h2>Lista de documentos</h2>
@@ -13,10 +12,10 @@
 <table class="table text-center table-striped">
     <thead class="table-dark">
         <tr>
-            <td scope="col"><b>Id</b></td>
-            <td scope="col"><b>Titulo</b></td>
+            <td scope="col"><b>ID</b></td>
+            <td scope="col"><b>Título</b></td>
             <td scope="col"><b>Estado</b></td>
-            <td scope="col"><b>Fecha de publicacion</b></td>
+            <td scope="col"><b>Fecha de publicación</b></td>
         </tr>
     </thead>
     <tbody>

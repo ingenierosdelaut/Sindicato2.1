@@ -203,6 +203,16 @@
             })
         })
 
+        livewire.on('alert-request-canceled', mensaje => {
+            Swal.fire({
+                icon: 'success',
+                position: 'center',
+                title: mensaje,
+                showConfirmButton: true
+            })
+        })
+
+
         livewire.on('alert-user-admin-create', mensaje => {
             Swal.fire({
                 icon: 'success',

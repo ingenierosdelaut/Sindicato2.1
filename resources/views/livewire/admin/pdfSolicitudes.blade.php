@@ -45,6 +45,8 @@
                             <td><span class="badge badge-pill badge-success">Aceptada</span></td>
                         @elseif ($request->estado == 2)
                             <td><span class="badge badge-pill badge-danger">Denegada</span></td>
+                        @elseif ($request->estado == 3)
+                            <td><span class="badge badge-pill badge-danger">Cancelada</span></td>
                         @endif
                         <!--Fecha-->
                         <td>{{ $request->created_at }}</td>

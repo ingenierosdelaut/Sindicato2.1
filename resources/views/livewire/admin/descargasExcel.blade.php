@@ -1,16 +1,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="{{ asset('static/css/app.css') }}">
 </head>
 
-<div class="container">
-    <h1><span style="color:#177c67">SUTUT</span><span style="color:grey">SLRC</span></h1>
+<h1><span style="color:#177c67">SUTUT</span><span style="color:grey">SLRC</span></h1>
+<h2>Lista de Descargas</h2>
 
-    <h2>Lista de Descargas</h2>
-</div>
 
-<table class="table text-center table-striped">
-    <thead class="table-dark">
+<table>
+    <thead>
         <tr>
             <td><b>ID</b></td>
             <td><b>Nombre</b></td>

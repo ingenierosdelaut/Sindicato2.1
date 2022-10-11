@@ -40,7 +40,6 @@ class AnuncioIndex extends Component
             ->where('titulo', 'LIKE', '%'.$this->search.'%')
             ->orwhere('contenido', 'LIKE', '%'.$this->search.'%')
             ->orwhere('nombre', 'LIKE', '%'.$this->search.'%')
-            //->orwhere('estado', 'LIKE', '%' . $this->search . '%')
             ->select(
                 'anuncios.*',
                 'usuarios.nombre',

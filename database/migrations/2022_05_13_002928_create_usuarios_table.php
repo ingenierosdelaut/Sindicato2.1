@@ -25,9 +25,16 @@ class CreateUsuariosTable extends Migration
             $table->date('nacimiento')->nullable();
             $table->string('nacionalidad')->nullable();
             $table->string('ciudad')->nullable();
+            $table->string('estado_m')->nullable();
+            $table->string('postal')->nullable();
             $table->string('colonia')->nullable();
             $table->string('gradoMax')->nullable();
+            $table->string('lvl_ingles')->nullable();
             $table->string('tipo_agremiado')->nullable();
+            $table->string('titulo_grado')->nullable();
+            $table->string('grado_estado')->nullable();
+            $table->string('vigencia_certificado')->nullable();
+            $table->string('Nempleado')->nullable();
             $table->string('carrera')->nullable();
             $table->string('puestoA')->nullable();
             $table->string('puestoD')->nullable();

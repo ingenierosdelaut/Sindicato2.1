@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Requests;
 
+use App\Http\Livewire\Requests\RulesRequest;
 use App\Models\Request;
+use App\Models\Solicitud;
 use App\Models\Usuario;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +13,7 @@ class RequestCreate extends Component
 {
     use WithPagination;
 
-    public Request $request;
+    public Solicitud $request;
 
     public $estado;
 
@@ -21,12 +23,12 @@ class RequestCreate extends Component
 
     public function mount()
     {
-        $this->request = new Request();
+        $this->request = new Solicitud();
     }
 
     public function render()
     {
-        $requests = Request::where('id_usuario', auth()->user()->id)
+        $requests = Solicitud::where('id_usuario', auth()->user()->id)
         ->orderby('created_at', 'desc')
         ->paginate(3);
         $usuarios = Usuario::all();
@@ -47,7 +49,7 @@ class RequestCreate extends Component
 
     public function edit($id)
     {
-        Request::find($id)->fill(['fecha' => $this->request['fecha']])->save();
+        Solicitud::find($id)->fill(['fecha' => $this->request['fecha']])->save();
         $this->emit('edit-success', 'Se modificó la solicitud con éxito');
 
         return redirect(route('requests.create'));

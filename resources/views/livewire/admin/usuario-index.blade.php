@@ -67,22 +67,27 @@
                         @foreach ($usuarios as $usuario)
                             <tr>
                                 @if ($usuario->is_admin == 1)
-                                    <td scope="row">
+                                    <td>
                                         <p>
-                                            <b> <span
-                                                    style="color:#177c67;">{{ $usuario->nombre }}</span>
+                                            <b> <span style="color:#177c67;">{{ $usuario->nombre }}</span>
                                                 <span style="color:grey;">
                                                     {{ $usuario->apellido }}</span> </b>
                                         </p>
                                     </td>
                                 @else
-                                    <td scope="row">{{ $usuario->nombre }}
-                                        {{ $usuario->apellido }} </td>
+                                    <td>
+                                        <div style="width: 200px; overflow: hidden;">{{ $usuario->nombre }}
+                                            {{ $usuario->apellido }} </div>
+                                    </td>
                                 @endif
 
-                                <td>{{ $usuario->tipo_agremiado }}</td>
+                                <td>
+                                    <div style="width: 175px; overflow: hidden;">{{ $usuario->tipo_agremiado }}</div>
+                                </td>
                                 <td>{{ $usuario->puestoD }}</td>
-                                <td>{{ $usuario->carrera }}</td>
+                                <td>
+                                    <div style="width: 175px; overflow: hidden;">{{ $usuario->carrera }}</div>
+                                </td>
                                 <td>{{ $usuario->departamento }}</td>
                                 <td>{{ $usuario->puestoA }}</td>
                                 @if ($usuario->estado == 1)
@@ -98,32 +103,32 @@
                                 @endif --}}
 
                                 <td>
-
-                                    @if ($usuario->is_admin == 1)
-                                        <a type="button" href="{{ route('show.admin', $usuario) }}"
-                                            title="Información del adminstrador(Vista previa)"
-                                            class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
-                                        <a type="button" href="{{ route('edit.admin', $usuario) }}"
-                                            title="Editar información del administrador"
-                                            class="btn btn-primary btn-sm "><i class="fa fa-edit fa-sm"></i></a>
-                                    @else
-                                        <a type="button" href="{{ route('admin.show-user', $usuario) }}"
-                                            title="Información del usuario(Vista previa)"
-                                            class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
-                                        <a type="button" href="{{ route('admin.user-edit', $usuario) }}"
-                                            title="Editar información del agremiado" class="btn btn-primary btn-sm "><i
-                                                class="fa fa-edit fa-sm"></i></a>
-                                    @endif
-                                    @if ($usuario->estado == 1)
-                                        <button wire:click="disable({{ $usuario->id }})" type="button"
-                                            title="Desactivar usuario" class="btn btn-warning btn-sm"><i
-                                                class="fa fa-user-slash fa-sm"></i></button>
-                                    @elseif ($usuario->estado == 0)
-                                        <button wire:click="enable({{ $usuario->id }})" type="button"
-                                            title="Activar usuario" class="btn btn-success btn-sm"><i
-                                                class="fa fa-user-slash fa-sm"></i></button>
-                                    @endif
-
+                                    <div style="width: 150px; overflow: hidden;">
+                                        @if ($usuario->is_admin == 1)
+                                            <a type="button" href="{{ route('show.admin', $usuario) }}"
+                                                title="Información del adminstrador(Vista previa)"
+                                                class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
+                                            <a type="button" href="{{ route('edit.admin', $usuario) }}"
+                                                title="Editar información del administrador"
+                                                class="btn btn-primary btn-sm "><i class="fa fa-edit fa-sm"></i></a>
+                                        @else
+                                            <a type="button" href="{{ route('admin.show-user', $usuario) }}"
+                                                title="Información del usuario(Vista previa)"
+                                                class="btn btn-info btn-sm info"><i class="fa fa-eye fa-sm"></i></a>
+                                            <a type="button" href="{{ route('admin.user-edit', $usuario) }}"
+                                                title="Editar información del agremiado"
+                                                class="btn btn-primary btn-sm "><i class="fa fa-edit fa-sm"></i></a>
+                                        @endif
+                                        @if ($usuario->estado == 1)
+                                            <button wire:click="disable({{ $usuario->id }})" type="button"
+                                                title="Desactivar usuario" class="btn btn-warning btn-sm"><i
+                                                    class="fa fa-user-slash fa-sm"></i></button>
+                                        @elseif ($usuario->estado == 0)
+                                            <button wire:click="enable({{ $usuario->id }})" type="button"
+                                                title="Activar usuario" class="btn btn-success btn-sm"><i
+                                                    class="fa fa-user-slash fa-sm"></i></button>
+                                        @endif
+                                    </div>
                                 </td>
 
                             </tr>

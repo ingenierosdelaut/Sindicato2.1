@@ -39,7 +39,7 @@
     {{-- Page content --}}
     <div class="row">
         <div class="col text-center table-responsive">
-            @if (count($documentos) > 0)
+            @if (count((array) $documentos))
                 <table class="table table-striped">
                     <thead class="table-dark">
                         <tr>

@@ -9,7 +9,6 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 class DescargasExport implements FromView, WithColumnWidths
 {
-    public $search;
 
     public function view(): View
     {

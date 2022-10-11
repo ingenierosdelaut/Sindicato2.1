@@ -1,4 +1,9 @@
 <div>
+
+    <head>
+        <link rel="stylesheet" href="{{ asset('static/css/textareaResponsive.css') }}">
+    </head>
+
     <div class="row">
         <div class="col">
             <form action="">
@@ -7,11 +12,14 @@
                 @error('anuncio.titulo')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-                <textarea class="mt-1 form-control" onkeyup="countChars(this);" id="contar" maxlength="200"
-                    wire:model="anuncio.contenido" type="text" placeholder="Especificaciones del anuncio"></textarea>
+
+                <textarea class="mt-1 form-control area" onkeyup="countChars(this);" id="contar" maxlength="200"
+                    wire:model="anuncio.contenido" type="text" placeholder="Especificaciones del anuncio">
+                </textarea>
                 @error('anuncio.contenido')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+
                 <p wire:ignore class="contador" id="caracters"></p>
             </form>
 
@@ -32,20 +40,20 @@
             </div>
 
 
-            <div class="row container">
+            <div class="row">
 
                 @if ($url_img != null)
                     <div class="col">
-                        <img class="mx-auto d-block" style="border-radius: 10px; width: 300px; height: 300px;"
+                        <img class="mx-auto d-block " style="border-radius: 10px;" width="700" height="500"
                             src="{{ $url_img->temporaryUrl() }}" alt="">
                     </div>
+                @else
+                    <p class="mx-auto d-block">No hay imagen <i class="fa fa-bullhorn" aria-hidden="true"></i></p>
                 @endif
 
                 @if ($anuncio->url_img)
                     <img src="{{ Storage::disk('public')->url($anuncio->url_img) }}" class="mx-auto d-block"
-                        style="border-radius: 10px; width: 350px; height: 300px;" alt="">
-                @else
-                    <p>No hay imagen <i class="fa fa-bullhorn" aria-hidden="true"></i></p>
+                         alt="">
                 @endif
             </div>
 

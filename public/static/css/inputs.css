@@ -58,7 +58,7 @@ input::placeholder {
 
 input[type=email] {
     background-color: lightgray;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #0c8461;
     box-sizing: border-box;
 }
@@ -95,6 +95,21 @@ input[type=date]:focus {
     width: 100%;
 }
 
+input[type=month] {
+    border-radius: 5px;
+    background-color: lightgray;
+    border: 1px solid #0c8461;
+    width: 100%;
+    padding: 5px;
+    margin: 0;
+}
+
+input[type=month]:focus {
+    border-radius: 5px;
+    border: 1px solid #0c8461;
+    width: 100%;
+}
+
 input[type=number] {
     border-radius: 5px;
     background-color: lightgray;
@@ -124,6 +139,7 @@ textarea[type=text] {
     border: 1px solid #0c8461;
     box-sizing: border-box;
     color: black;
+    height: 250px;
     outline: none;
 }
 
@@ -272,4 +288,8 @@ tr:hover td {
     margin: 0 auto;
 }
 
+.filtro {
+    display: flex;
+    flex-direction: row;
+}
 
