@@ -28,9 +28,11 @@ class Solicitudes extends Component
 
     public $search = '';
 
-    public $f1 = '2022-10-08';
+    public $searchBettwen = false;
 
-    public $f2 = '2022-10-15';
+    public $f1;
+
+    public $f2;
 
     public function mount()
     {
@@ -40,42 +42,41 @@ class Solicitudes extends Component
 
     public function render(Request $request)
     {
-        $requests = Solicitud::join('usuarios', 'id_usuario', '=', 'usuarios.id')
-            ->whereBetween('fecha', [$this->f1, $this->f2])
-            ->where('nombre', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('fecha', 'LIKE', '%' . $this->search . '%')
-            ->orwhere('motivo', 'LIKE', '%' . $this->search . '%')
-            ->select(
-                'solicituds.*',
-                'usuarios.nombre',
-                'usuarios.apellido'
-            )
+        if ($this->search != '') {
+            $this->searchBettwen = false;
+        }
+        if ($this->searchBettwen) {
+            $requests = Solicitud::join('usuarios', 'id_usuario', '=', 'usuarios.id')
+                ->whereBetween('fecha', [$this->f1, $this->f2])
+                ->select(
+                    'solicituds.*',
+                    'usuarios.nombre',
+                    'usuarios.apellido'
+                )
 
-            ->orderby('estado', 'asc')
-            ->paginate(6);
-        // dd($requests);
+                ->orderby('estado', 'asc')
+                ->paginate(6);
+        } else {
+            $requests = Solicitud::join('usuarios', 'id_usuario', '=', 'usuarios.id')
+                ->where('usuarios.nombre', 'LIKE', '%' . $this->search . '%')
+                ->orwhere('solicituds.fecha', 'LIKE', '%' . $this->search . '%')
+                ->orwhere('solicituds.estado', 'LIKE', '%' . $this->search . '%')
+                ->select(
+                    'solicituds.*',
+                    'usuarios.nombre',
+                    'usuarios.apellido'
+                )
+
+                ->orderby('estado', 'asc')
+                ->paginate(6);
+        }
 
         return view('livewire.admin.solicitudes', compact('requests'))->layout('layouts.app-admin')->slot('slotAdmin');
     }
 
-    public function filtrar()
+    public function filtroFecha($active)
     {
-        // $requests = Solicitud::where('fecha', 'LIKE', '%', $this->f1)->orwhere('fecha', 'LIKE', '%', $this->f2);
-        // whereDate('fecha', $request->f1)->whereDate('fecha', $request->f2)->get()
-        // where('fecha', 'BETWEEN', '%' . 'and' . '%' .  $request->f1 . '%')->where('fecha', 'BETWEEN', '%' . 'and' . '%' .  $request->f2 . '%')->get()
-        // $datos['requests'] = $requests;
-        // whereBetween('fecha', [$request->f1, $request->f2])->get()
-        // dd($datos);
-        // dd($requests);
-        // $requests = Solicitud::where('fecha', '>=', $request->f1)->where('fehca', '<=', $request->f2)->get();
-        // $datos['requests'] = $requests;
-        // dd($datos);
-        // $f1 = $request->input('f1');
-        // $f2 = $request->input('f2');
-        // $requests = DB::table('solicituds')->select()->where('fecha', '>=', $request->f1)->where('fecha', '<=', $request->f2)->get();
-        // dd($requests);
-        $requests = Solicitud::whereBetween('fecha', [$this->f1, $this->f2])->get();
-        return view('livewire.admin.solicitudes', compact('requests'));
+        $this->searchBettwen = $active;
     }
 
     public function aceptar($id)

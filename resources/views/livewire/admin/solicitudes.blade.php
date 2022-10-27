@@ -15,30 +15,28 @@
             </div>
 
             <div class="col-5">
-                <form>
-                    {{-- @csrf --}}
-                    <div class="container">
-                        <div class="row">
-                            <div class="container-fluid">
-                                <div class="form-group row">
-                                    <div class="col-sm-5">
-                                        <input wire:model="f1" type="date" id="f1" name="f1" required>
-                                        <label for="f1">Fecha Inicio</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <input wire:model="f2" type="date" id="f2" name="f2" required>
-                                        <label for="f2">Fecha Fin</label>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button class="btn btn-dark btn-sm" type="submit"><i
-                                                class="fa fa-search"></i></button>
-                                    </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="form-group row">
+                                <div class="col-sm-5">
+                                    <input wire:model="f1" type="date" required>
+                                    <label>Fecha Inicio</label>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input wire:model="f2" type="date" required>
+                                    <label>Fecha Fin</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button wire:click='filtroFecha(true)' class="btn btn-dark btn-sm"><i
+                                            class="fa fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
+
 
             <div class="col-3">
                 <div class="dropdown">
